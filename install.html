@@ -1,235 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-[#030712] text-slate-200">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="referrer" content="strict-origin-when-cross-origin" />
-<!-- Removed invalid http-equiv meta tags for HTML validation -->
-<title>Installation Guide - How to Install ArttulOS Linux Step-by-Step</title>
-<meta name="description" content="Complete step-by-step guide to install ArttulOS Linux. Learn how to install Linux on your computer, create bootable USB, partition drives, and configure your new Arch-based Linux system." />
-<meta name="keywords" content="install Linux, Linux installation guide, how to install ArttulOS, install Arch Linux, Linux setup, bootable USB Linux, dual boot Linux, Linux tutorial, install operating system" />
-<link rel="canonical" href="https://arttulos.org/install.html" />
-<link rel="stylesheet" href="contact.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-<script>
-if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});})}
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Provisioning_Protocol | ArttulOS Sovereign Hybrid Deployment</title>
+  <meta name="description" content="Official deployment manual for ArttulOS. Step-by-step instructions for initializing the RHEL/Arch/Nix hybrid environment." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan-volt: #00f2ff;
+      --rhel-red: #ff3e3e;
+      --slate-panel: #0f172a;
+    }
+    body { font-family: 'Space Grotesk', sans-serif; background-attachment: fixed; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    
+    #background-grid {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1;
+        background-image: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), 
+                          linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(1000%); }
+    }
+    .scanline {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 2px;
+        background: rgba(0, 242, 255, 0.03);
+        animation: scanline 10s linear infinite;
+        pointer-events: none;
+        z-index: 100;
+    }
+
+    .brutal-card {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 4px 4px 0px rgba(0, 242, 255, 0.05);
+      backdrop-filter: blur(8px);
+    }
+
+    .step-number {
+      background: var(--cyan-volt);
+      color: black;
+      font-weight: 900;
+      padding: 2px 12px;
+      font-style: italic;
+    }
+
+    pre {
+      background: #000 !important;
+      border-left: 3px solid var(--cyan-volt);
+    }
+
+    .logo-box {
+      width: 40px; height: 40px;
+      background: var(--cyan-volt);
+      color: black;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.5rem; rotate: 45deg; border: 1px solid white;
+    }
+
+    .hero-glitch {
+      text-shadow: 2px 0 var(--rhel-red), -2px 0 var(--cyan-volt);
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--cyan-volt); }
+  </style>
 </head>
-<body>
-<div id="background-grid"></div>
+<body class="selection:bg-cyan-500 selection:text-black">
 
-<header class="page-header">
-<div class="header-content">
-<a href="index.html" class="logo">
-<img src="arttuloslogo.webp" alt="ArttulOS Logo" class="logo-img" />
-<span class="logo-text">Acreetion<span>OS</span></span>
-</a>
-<nav class="main-nav">
-<a href="index.html">Home</a>
-<a href="install.html" class="active">Install</a>
-<a href="compare.html">Compare</a>
-<a href="faq.html">FAQ</a>
-<a href="blog.html">Blog</a>
-<a href="contact.html">Contact</a>
-</nav>
-</div>
-</header>
+  <div id="background-grid"></div>
+  <div class="scanline"></div>
 
-<div class="page-wrapper">
-<div class="main-column">
-<div class="content-box">
-<div class="box-header">
-<h1>Complete Installation Guide</h1>
-</div>
-<div class="box-body">
-<p style="font-size: 1.1rem; margin-bottom: 2rem;">Follow this comprehensive guide to install ArttulOS Linux on your computer. This guide works for beginners and advanced users alike.</p>
+  <!-- HUD NAVIGATION -->
+  <header class="border-b border-white/5 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
+    <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-6">
+        <div class="logo-box">A</div>
+        <div>
+          <span class="text-xl font-black uppercase tracking-tighter block leading-none">Arttul<span class="text-cyan-400">OS</span></span>
+          <p class="text-[9px] mono text-cyan-600 uppercase font-bold mt-1">Brought to you by the co-lead of AcreetionOS</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex space-x-8 mono text-[11px] font-bold uppercase tracking-widest text-slate-400">
+        <a href="index.html" class="hover:text-white transition">Dashboard</a>
+        <a href="install.html" class="text-cyan-400 border-b border-cyan-400">Provisioning</a>
+        <a href="git-tracker.html" class="hover:text-white transition">Repo_Sync</a>
+        <a href="faq.html" class="hover:text-white transition">Intel_Database</a>
+        <a href="blog.html" class="hover:text-white transition">Project_Logs</a>
+      </nav>
+    </div>
+  </header>
 
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Step 1: Download ArttulOS ISO</h2>
-<p>Visit our <a href="index.html#manual-downloads">download page</a> and get the latest ArttulOS ISO file.</p>
-<ul style="margin-left: 2rem; margin-top: 0.5rem;">
-<li><strong>File size:</strong> ~2.5 GB</li>
-<li><strong>Architecture:</strong> x86_64 (64-bit)</li>
-<li><strong>Desktop:</strong> Cinnamon</li>
-</ul>
+  <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12">
+    
+    <main class="flex-1 space-y-16">
+      <section>
+        <div class="inline-block px-2 py-1 bg-red-600/10 border border-red-500 text-red-500 text-[10px] mono font-bold uppercase tracking-[0.3em] mb-4">
+          Status: Deployment_Protocol_Active
+        </div>
+        <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter italic mb-6 hero-glitch leading-none">
+          System <br><span class="text-cyan-400">Provisioning</span>.
+        </h1>
+        <p class="text-xl text-slate-400 max-w-2xl leading-relaxed italic font-light">
+          Initializing the Sovereign Hybrid environment. ArttulOS orchestrates 
+          <span class="text-white font-bold">RHEL Binary Stability</span>, <span class="text-white font-bold">Arch Fast-Rolling</span>, and <span class="text-white font-bold">Nix Atomic Shims</span>.
+        </p>
+      </section>
 
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Step 2: Create Bootable USB Drive</h2>
-<p><strong>Required:</strong> USB drive with at least 4GB capacity</p>
+      <!-- STEPS -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="step-number">01</span>
+          <h2 class="text-2xl font-bold uppercase italic tracking-tight">Image Acquisition</h2>
+        </div>
+        <div class="brutal-card p-8">
+          <p class="mb-6 text-slate-300 font-light">Download the Sovereign ISO. This hybrid image contains the <strong>PacNixum</strong> engine and specific kernel shims for RHEL 9 binary compatibility.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mono text-[11px]">
+            <div class="border border-white/5 p-4 bg-slate-900/30 uppercase font-bold text-slate-500">Node_Size: <span class="text-cyan-400">2.8GB</span></div>
+            <div class="border border-white/5 p-4 bg-slate-900/30 uppercase font-bold text-slate-500">Arch: <span class="text-white">x86_64-v3</span></div>
+            <div class="border border-white/5 p-4 bg-slate-900/30 uppercase font-bold text-slate-500">Kernel: <span class="text-red-500">Hardened-LTS</span></div>
+          </div>
+        </div>
+      </div>
 
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">On Linux:</h3>
-<pre style="background: var(--acreetion-code-bg); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;">
-<code># Replace /dev/sdX with your USB device (check with lsblk)
-sudo dd if=arttulos-*.iso of=/dev/sdX bs=4M status=progress && sync</code>
-</pre>
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="step-number">02</span>
+          <h2 class="text-2xl font-bold uppercase italic tracking-tight">Flash Media</h2>
+        </div>
+        <div class="brutal-card p-8">
+          <pre class="p-6 overflow-x-auto">
+<code class="mono text-xs text-cyan-100"># Transmit bit-stream to physical disk
+sudo dd if=arttul_iso_v1.iso of=/dev/sdX status=progress && sync</code></pre>
+        </div>
+      </div>
 
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">On Windows:</h3>
-<p>Use <a href="https://rufus.ie/" target="_blank">Rufus</a> or <a href="https://www.balena.io/etcher/" target="_blank">Balena Etcher</a></p>
-<ol style="margin-left: 2rem; margin-top: 0.5rem;">
-<li>Download and run Rufus</li>
-<li>Select your USB drive</li>
-<li>Select the ArttulOS ISO file</li>
-<li>Click "START" and wait for completion</li>
-</ol>
+      <div class="space-y-4 border-t border-white/5 pt-12">
+        <h2 class="text-3xl font-black uppercase italic tracking-tighter hero-glitch">Post_Provisioning_Sync</h2>
+        <p class="text-sm text-slate-400 italic">Initialize the hybrid package engine once the node is live.</p>
+        <pre class="p-6">
+<code class="mono text-xs text-emerald-400"># 1. Handshake with all repository layers
+pacnixum sync --global
 
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">On macOS:</h3>
-<p>Use <a href="https://www.balena.io/etcher/" target="_blank">Balena Etcher</a> (easiest) or Terminal:</p>
-<pre style="background: var(--acreetion-code-bg); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;">
-<code># Find your USB device
-diskutil list
+# 2. Deploy Enterprise layer application
+pacnixum install --layer=rhel postgresql-server
 
-# Unmount it (replace diskN with your device)
-diskutil unmountDisk /dev/diskN
+# 3. Deploy AUR layer utility
+pacnixum install --layer=aur code-bin</code></pre>
+      </div>
+    </main>
 
-# Write ISO
-sudo dd if=arttulos-*.iso of=/dev/rdiskN bs=1m</code>
-</pre>
+    <!-- SIDEBAR -->
+    <aside class="w-full lg:w-96 space-y-8">
+      <div class="brutal-card p-6 bg-slate-900/20 border-white/10">
+        <h3 class="text-xs mono text-cyan-500 font-bold uppercase mb-4 tracking-widest border-b border-white/5 pb-2">Resource_Matrix</h3>
+        <p class="text-[11px] text-slate-500 mb-4 leading-relaxed font-bold">Validate your hardware against the Sovereign constraints before deployment.</p>
+        <a href="requirements.html" class="block w-full py-2 bg-white/5 text-center text-xs mono font-bold uppercase hover:bg-white/10 transition-all border border-white/10">Check_Compatibility</a>
+      </div>
 
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Step 3: Boot from USB</h2>
-<ol style="margin-left: 2rem;">
-<li>Insert the USB drive into your computer</li>
-<li>Restart your computer</li>
-<li>Press the boot menu key during startup:
-<ul style="margin-left: 2rem; margin-top: 0.5rem;">
-<li><strong>Dell:</strong> F12</li>
-<li><strong>HP:</strong> F9 or Esc</li>
-<li><strong>Lenovo:</strong> F12 or F8</li>
-<li><strong>Asus:</strong> F8 or Esc</li>
-<li><strong>Acer:</strong> F12</li>
-<li><strong>MSI:</strong> F11</li>
-<li><strong>Generic:</strong> F2, F10, F11, F12, Del, or Esc</li>
-</ul>
-</li>
-<li>Select your USB drive from the boot menu</li>
-<li>ArttulOS will boot into the live environment</li>
-</ol>
+      <div class="brutal-card p-6 border-red-500/30 bg-red-950/10">
+        <h3 class="text-xs mono text-red-500 font-bold uppercase mb-2">Heritage_Core</h3>
+        <p class="text-[11px] text-slate-400 leading-relaxed italic">"ArttulOS is the biological child of five ideologies, engineered by the co-lead of AcreetionOS."</p>
+        <div class="text-[10px] mono font-bold text-white uppercase flex justify-between mt-4">
+          <span>Lead Architect:</span>
+          <span class="text-cyan-400">Natalie Spiva</span>
+        </div>
+      </div>
 
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Step 4: Start the Installer</h2>
-<p>Once booted into ArttulOS live environment:</p>
-<ol style="margin-left: 2rem;">
-<li>Look for the <strong>"Install ArttulOS"</strong> icon on the desktop</li>
-<li>Double-click to launch the installer</li>
-<li>The Calamares installer will guide you through the process</li>
-</ol>
+      <div class="space-y-2">
+          <a href="selfhelp.html" class="block p-4 border border-white/10 hover:border-cyan-400 hover:bg-white/5 transition-all mono text-xs font-black uppercase">:: Knowledge_Engine</a>
+          <a href="compare.html" class="block p-4 border border-white/10 hover:border-cyan-400 hover:bg-white/5 transition-all mono text-xs font-black uppercase">:: Hybrid_Logic</a>
+          <a href="contact.html" class="block p-4 border border-white/10 hover:border-cyan-400 hover:bg-white/5 transition-all mono text-xs font-black uppercase">:: Support_Nexus</a>
+      </div>
+    </aside>
+  </div>
 
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Step 5: Configure Installation</h2>
-
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">Choose Your Language & Region</h3>
-<p>Select your preferred language, timezone, and keyboard layout.</p>
-
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">Partition Your Drive</h3>
-<p><strong>⚠ WARNING:</strong> Partitioning will erase data. Back up important files first!</p>
-
-<p><strong>Option 1: Erase Entire Disk</strong> (Recommended for beginners)</p>
-<ul style="margin-left: 2rem;">
-<li>Select "Erase disk"</li>
-<li>Choose your target drive</li>
-<li>The installer will automatically create partitions</li>
-</ul>
-
-<p style="margin-top: 1rem;"><strong>Option 2: Manual Partitioning</strong> (Advanced users)</p>
-<ul style="margin-left: 2rem;">
-<li><strong>EFI System Partition:</strong> 512 MB, FAT32, mounted at /boot/efi</li>
-<li><strong>Root Partition:</strong> 30+ GB, ext4, mounted at /</li>
-<li><strong>Home Partition (optional):</strong> Remaining space, ext4, mounted at /home</li>
-<li><strong>Swap (optional):</strong> 2-8 GB depending on RAM</li>
-</ul>
-
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">Create User Account</h3>
-<ul style="margin-left: 2rem;">
-<li>Enter your full name</li>
-<li>Choose a username (lowercase, no spaces)</li>
-<li>Set a strong password</li>
-<li>Choose whether to auto-login</li>
-</ul>
-
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Step 6: Install</h2>
-<ol style="margin-left: 2rem;">
-<li>Review your installation summary</li>
-<li>Click <strong>"Install"</strong></li>
-<li>Wait 5-15 minutes for installation to complete</li>
-<li>Installation will copy files, install bootloader, and configure system</li>
-</ol>
-
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Step 7: Reboot & Enjoy</h2>
-<ol style="margin-left: 2rem;">
-<li>Click <strong>"Restart Now"</strong> when prompted</li>
-<li>Remove the USB drive when asked</li>
-<li>Your computer will boot into ArttulOS</li>
-<li>Log in with the credentials you created</li>
-</ol>
-
-<h2 style="color: var(--acreetion-green); margin-top: 2rem; margin-bottom: 1rem;">Post-Installation Steps</h2>
-
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">Update Your System</h3>
-<pre style="background: var(--acreetion-code-bg); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;">
-<code>sudo pacman -Syu</code>
-</pre>
-
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">Install Additional Software</h3>
-<p>Use the built-in Pamac package manager or command line:</p>
-<pre style="background: var(--acreetion-code-bg); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;">
-<code>sudo pacman -S firefox vlc gimp libreoffice</code>
-</pre>
-
-<h3 style="color: var(--acreetion-text-bright); margin-top: 1.5rem; margin-bottom: 0.5rem;">Enable AUR (Arch User Repository)</h3>
-<p>AUR is already configured in ArttulOS! Just use Pamac GUI or install an AUR helper:</p>
-<pre style="background: var(--acreetion-code-bg); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0;">
-<code>sudo pacman -S yay
-yay -S google-chrome spotify</code>
-</pre>
-</div>
-</div>
-</div>
-
-<div class="sidebar-column">
-<div class="content-box">
-<div class="box-header">
-<h3>System Requirements</h3>
-</div>
-<div class="box-body">
-<p><a href="requirements.html" class="btn">View Full Requirements →</a></p>
-<p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Minimum:</strong> 2GB RAM, 20GB storage, 64-bit processor</p>
-</div>
-</div>
-
-<div class="content-box">
-<div class="box-header">
-<h3>Need Help?</h3>
-</div>
-<div class="box-body">
-<ul class="resource-list">
-<li><a href="faq.html">
-<span class="resource-title">FAQ</span>
-</a></li>
-<li><a href="contact.html">
-<span class="resource-title">Get Support</span>
-</a></li>
-<li><a href="https://github.com/ArttulOS-Linux" target="_blank">
-<span class="resource-title">GitHub</span>
-</a></li>
-<li><a href="https://discord.gg/AJ6uuvtDXY" target="_blank">
-<span class="resource-title">Discord Community</span>
-</a></li>
-</ul>
-</div>
-</div>
-
-<div class="content-box">
-<div class="box-header">
-<h3>Video Tutorial</h3>
-</div>
-<div class="box-body">
-<p>Coming soon! Subscribe to our YouTube channel for installation walkthroughs.</p>
-</div>
-</div>
-</div>
-</div>
-
-<footer class="page-footer">
-<p>&copy; 2026 ArttulOS Project. Free and Open Source Software.</p>
-<p>Licensed under GNU General Public License v3.0</p>
-</footer>
+  <footer class="mt-20 border-t border-white/5 bg-black py-16 px-8">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center md:text-left">
+      <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-600">
+        <p class="mb-2">ArttulOS Sovereign Deployment</p>
+        <p>Deployment: Provisioning_v1.0.4</p>
+        <p>Architect: Natalie Spiva</p>
+      </div>
+      <div class="text-center">
+        <p class="text-xs mono font-bold text-cyan-500 mb-2 uppercase tracking-widest italic">Brought to you by the co-lead of AcreetionOS</p>
+        <p class="text-2xl font-black italic tracking-tighter uppercase leading-none">ArttulOS Project</p>
+      </div>
+      <div class="flex flex-col items-center md:items-end gap-2 text-[10px] mono uppercase text-slate-500 font-bold">
+        <p>© 2026 Natalie Spiva. All Rights Reserved.</p>
+        <div class="flex space-x-4">
+          <a href="requirements.html" class="hover:text-white transition">Hardware</a>
+          <a href="faq.html" class="hover:text-white transition">Intel</a>
+          <a href="blog.html" class="hover:text-white transition">Logs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>

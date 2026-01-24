@@ -1,4 +1,4 @@
-# ArttulOS Website - Search Engine Optimization Policy
+# AcreetionOS Website - Search Engine Optimization Policy
 # Allow all major search engines, block AI training bots only
 
 # Block AI training bots
@@ -25,4 +25,4 @@ Disallow:
 Allow: /
 
 # Sitemap location
-Sitemap: https://arttulos.org/sitemap.xml
+Sitemap: https://acreetionos.org/sitemap.xml

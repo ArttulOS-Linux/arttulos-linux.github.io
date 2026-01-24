@@ -1,7 +1,7 @@
 {
-  "name": "arttulos-website",
+  "name": "acreetionos-website",
   "version": "1.0.0",
-  "description": "ArttulOS Linux official website",
+  "description": "AcreetionOS Linux official website",
   "private": true,
   "scripts": {
     "test": "playwright test",

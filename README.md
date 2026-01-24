@@ -1,8 +1,6 @@
-# ArttulOS Website
+# AcreetionOS Website
 
-Official website for ArttulOS Linux, hosted via GitHub Pages.
-
-> NOTE: This project is transitioning into a RHEL One-to-One compatible distribution for consumers. This is a work-in-progress (WIP). See `distro.html` on the website for project status, roadmap, and legal/disclaimer information.
+Official website for AcreetionOS Linux, hosted via GitHub Pages.
 
 ## Tech Stack
 
@@ -24,7 +22,7 @@ python3 -m http.server 8000
 **Prerequisites:** Node.js, npm, Firefox
 
 ```bash
-cd /drive1/Projects/arttulos-linux.github.io
+cd /drive1/Projects/acreetionos-linux.github.io
 bash tests/run_firefox_local.sh
 ```
 
@@ -60,7 +58,7 @@ Automated checks on push/PR:
 
 Automatic deployment to GitHub Pages from `main` branch.
 
-**Custom domain:** arttulos.org (configured via CNAME)
+**Custom domain:** acreetionos.org (configured via CNAME)
 
 ## Contributing
 
