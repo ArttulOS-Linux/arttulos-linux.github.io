@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#030712] text-slate-200">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Provisioning_Protocol | ArttulOS Sovereign Hybrid Deployment</title>
+  <meta name="description" content="Official deployment manual for ArttulOS. Step-by-step instructions for initializing the RHEL/Arch/Nix hybrid environment." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan-volt: #00f2ff;
+      --rhel-red: #ff3e3e;
+      --slate-panel: #0f172a;
+    }
+    body { font-family: 'Space Grotesk', sans-serif; background-attachment: fixed; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    
+    #background-grid {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1;
+        background-image: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), 
+                          linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    @keyframes scanline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(1000%); }
+    }
+    .scanline {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 2px;
+        background: rgba(0, 242, 255, 0.03);
+        animation: scanline 10s linear infinite;
+        pointer-events: none;
+        z-index: 100;
+    }
+
+    .brutal-card {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 4px 4px 0px rgba(0, 242, 255, 0.05);
+      backdrop-filter: blur(8px);
+    }
+
+    .step-number {
+      background: var(--cyan-volt);
+      color: black;
+      font-weight: 900;
+      padding: 2px 12px;
+      font-style: italic;
+    }
+
+    pre {
+      background: #000 !important;
+      border-left: 3px solid var(--cyan-volt);
+    }
+
+    .logo-box {
+      width: 40px; height: 40px;
+      background: var(--cyan-volt);
+      color: black;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.5rem; rotate: 45deg; border: 1px solid white;
+    }
+
+    .hero-glitch {
+      text-shadow: 2px 0 var(--rhel-red), -2px 0 var(--cyan-volt);
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--cyan-volt); }
+  </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-black">
+
+  <div id="background-grid"></div>
+  <div class="scanline"></div>
+
+  <!-- HUD NAVIGATION -->
+  <header class="border-b border-white/5 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
+    <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-6">
+        <div class="logo-box">A</div>
+        <div>
+          <span class="text-xl font-black uppercase tracking-tighter block leading-none">Arttul<span class="text-cyan-400">OS</span></span>
+          <p class="text-[9px] mono text-cyan-600 uppercase font-bold mt-1">Brought to you by the co-lead of AcreetionOS</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex space-x-8 mono text-[11px] font-bold uppercase tracking-widest text-slate-400">
+        <a href="index.html" class="hover:text-white transition">Dashboard</a>
+        <a href="install.html" class="text-cyan-400 border-b border-cyan-400">Provisioning</a>
+        <a href="git-tracker.html" class="hover:text-white transition">Repo_Sync</a>
+        <a href="faq.html" class="hover:text-white transition">Intel_Database</a>
+        <a href="blog.html" class="hover:text-white transition">Project_Logs</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12">
+    
+    <main class="flex-1 space-y-16">
+      <section>
+        <div class="inline-block px-2 py-1 bg-red-600/10 border border-red-500 text-red-500 text-[10px] mono font-bold uppercase tracking-[0.3em] mb-4">
+          Status: Deployment_Protocol_Active
+        </div>
+        <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter italic mb-6 hero-glitch leading-none">
+          System <br><span class="text-cyan-400">Provisioning</span>.
+        </h1>
+        <p class="text-xl text-slate-400 max-w-2xl leading-relaxed italic font-light">
+          Initializing the Sovereign Hybrid environment. ArttulOS orchestrates 
+          <span class="text-white font-bold">RHEL Binary Stability</span>, <span class="text-white font-bold">Arch Fast-Rolling</span>, and <span class="text-white font-bold">Nix Atomic Shims</span>.
+        </p>
+      </section>
+
+      <!-- STEPS -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="step-number">01</span>
+          <h2 class="text-2xl font-bold uppercase italic tracking-tight">Image Acquisition</h2>
+        </div>
+        <div class="brutal-card p-8">
+          <p class="mb-6 text-slate-300 font-light">Download the Sovereign ISO. This hybrid image contains the <strong>PacNixum</strong> engine and specific kernel shims for RHEL 9 binary compatibility.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mono text-[11px]">
+            <div class="border border-white/5 p-4 bg-slate-900/30 uppercase font-bold text-slate-500">Node_Size: <span class="text-cyan-400">2.8GB</span></div>
+            <div class="border border-white/5 p-4 bg-slate-900/30 uppercase font-bold text-slate-500">Arch: <span class="text-white">x86_64-v3</span></div>
+            <div class="border border-white/5 p-4 bg-slate-900/30 uppercase font-bold text-slate-500">Kernel: <span class="text-red-500">Hardened-LTS</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="step-number">02</span>
+          <h2 class="text-2xl font-bold uppercase italic tracking-tight">Flash Media</h2>
+        </div>
+        <div class="brutal-card p-8">
+          <pre class="p-6 overflow-x-auto">
+<code class="mono text-xs text-cyan-100"># Transmit bit-stream to physical disk
+sudo dd if=arttul_iso_v1.iso of=/dev/sdX status=progress && sync</code></pre>
+        </div>
+      </div>
+
+      <div class="space-y-4 border-t border-white/5 pt-12">
+        <h2 class="text-3xl font-black uppercase italic tracking-tighter hero-glitch">Post_Provisioning_Sync</h2>
+        <p class="text-sm text-slate-400 italic">Initialize the hybrid package engine once the node is live.</p>
+        <pre class="p-6">
+<code class="mono text-xs text-emerald-400"># 1. Handshake with all repository layers
+pacnixum sync --global
+
+# 2. Deploy Enterprise layer application
+pacnixum install --layer=rhel postgresql-server
+
+# 3. Deploy AUR layer utility
+pacnixum install --layer=aur code-bin</code></pre>
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="w-full lg:w-96 space-y-8">
+      <div class="brutal-card p-6 bg-slate-900/20 border-white/10">
+        <h3 class="text-xs mono text-cyan-500 font-bold uppercase mb-4 tracking-widest border-b border-white/5 pb-2">Resource_Matrix</h3>
+        <p class="text-[11px] text-slate-500 mb-4 leading-relaxed font-bold">Validate your hardware against the Sovereign constraints before deployment.</p>
+        <a href="requirements.html" class="block w-full py-2 bg-white/5 text-center text-xs mono font-bold uppercase hover:bg-white/10 transition-all border border-white/10">Check_Compatibility</a>
+      </div>
+
+      <div class="brutal-card p-6 border-red-500/30 bg-red-950/10">
+        <h3 class="text-xs mono text-red-500 font-bold uppercase mb-2">Heritage_Core</h3>
+        <p class="text-[11px] text-slate-400 leading-relaxed italic">"ArttulOS is the biological child of five ideologies, engineered by the co-lead of AcreetionOS."</p>
+        <div class="text-[10px] mono font-bold text-white uppercase flex justify-between mt-4">
+          <span>Lead Architect:</span>
+          <span class="text-cyan-400">Natalie Spiva</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+          <a href="selfhelp.html" class="block p-4 border border-white/10 hover:border-cyan-400 hover:bg-white/5 transition-all mono text-xs font-black uppercase">:: Knowledge_Engine</a>
+          <a href="compare.html" class="block p-4 border border-white/10 hover:border-cyan-400 hover:bg-white/5 transition-all mono text-xs font-black uppercase">:: Hybrid_Logic</a>
+          <a href="contact.html" class="block p-4 border border-white/10 hover:border-cyan-400 hover:bg-white/5 transition-all mono text-xs font-black uppercase">:: Support_Nexus</a>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="mt-20 border-t border-white/5 bg-black py-16 px-8">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center md:text-left">
+      <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-600">
+        <p class="mb-2">ArttulOS Sovereign Deployment</p>
+        <p>Deployment: Provisioning_v1.0.4</p>
+        <p>Architect: Natalie Spiva</p>
+      </div>
+      <div class="text-center">
+        <p class="text-xs mono font-bold text-cyan-500 mb-2 uppercase tracking-widest italic">Brought to you by the co-lead of AcreetionOS</p>
+        <p class="text-2xl font-black italic tracking-tighter uppercase leading-none">ArttulOS Project</p>
+      </div>
+      <div class="flex flex-col items-center md:items-end gap-2 text-[10px] mono uppercase text-slate-500 font-bold">
+        <p>© 2026 Natalie Spiva. All Rights Reserved.</p>
+        <div class="flex space-x-4">
+          <a href="requirements.html" class="hover:text-white transition">Hardware</a>
+          <a href="faq.html" class="hover:text-white transition">Intel</a>
+          <a href="blog.html" class="hover:text-white transition">Logs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

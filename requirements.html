@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#030712] text-slate-200">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resource_Matrix | ArttulOS Hardware Constraints</title>
+<meta name="description" content="Technical hardware constraints for the ArttulOS Sovereign Hybrid. Validate your silicon before deployment." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cyan-volt: #00f2ff;
+  --rhel-red: #ff3e3e;
+  --bg-void: #030712;
+}
+
+body { font-family: 'Space Grotesk', sans-serif; background-attachment: fixed; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Brutalist Background Grid */
+#background-grid {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background-image: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), 
+                      linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(1000%); }
+}
+.scanline {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: rgba(0, 242, 255, 0.03);
+    animation: scanline 10s linear infinite;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.brutal-card {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 4px 4px 0px rgba(0, 242, 255, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.spec-table {
+  width: 100%;
+  font-size: 0.85rem;
+}
+.spec-table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.spec-table td {
+  padding: 1.25rem 0;
+}
+.spec-label {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.tag-hybrid {
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.status-dot {
+  height: 6px; width: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.logo-box {
+  width: 40px; height: 40px;
+  background: var(--cyan-volt);
+  color: black;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 1.5rem; rotate: 45deg; border: 1px solid white;
+}
+
+.hero-glitch {
+  text-shadow: 2px 0 var(--rhel-red), -2px 0 var(--cyan-volt);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--cyan-volt); }
+</style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-black">
+
+<div id="background-grid"></div>
+<div class="scanline"></div>
+
+<!-- HEADER HUD -->
+<header class="border-b border-white/5 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
+  <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-6">
+      <div class="logo-box">A</div>
+      <div>
+        <h1 class="text-xl font-bold tracking-tighter leading-none uppercase">Arttul<span class="text-cyan-400">OS</span></h1>
+        <p class="text-[9px] mono text-cyan-600 font-bold uppercase tracking-widest mt-1">Brought to you by the co-lead of AcreetionOS</p>
+      </div>
+    </div>
+    <nav class="hidden md:flex space-x-8 mono text-[11px] font-bold uppercase tracking-widest text-slate-400">
+      <a href="index.html" class="hover:text-white transition">Dashboard</a>
+      <a href="install.html" class="hover:text-white transition">Provisioning</a>
+      <a href="repo-sync.html" class="hover:text-white transition">Repo_Sync</a>
+      <a href="blog.html" class="hover:text-white transition">Intelligence</a>
+      <a href="#" class="text-cyan-400 border-b border-cyan-400">Resource_Matrix</a>
+    </nav>
+  </div>
+</header>
+
+<div class="max-w-7xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12">
+  
+  <!-- MAIN CONTENT: VALIDATION DATA -->
+  <main class="flex-1">
+    <div class="mb-12">
+      <div class="inline-block px-2 py-1 bg-cyan-400/10 border border-cyan-400 text-cyan-400 text-[10px] mono font-bold uppercase tracking-[0.3em] mb-4">
+        Environmental_Validation_Protocol
+      </div>
+      <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-6 hero-glitch">Resource_<span class="text-cyan-400">Matrix</span>.</h2>
+      <p class="text-xl text-slate-400 max-w-2xl leading-relaxed italic font-light">
+        ArttulOS requires specific architectural parameters to orchestrate its <span class="text-white font-bold">Triple-Layer Engine</span>. Validate your hardware against these constraints before initializing deployment.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      <!-- MINIMUM -->
+      <div class="brutal-card p-8">
+        <h3 class="text-2xl font-black uppercase italic mb-6 tracking-tight flex justify-between items-center">
+          Baseline 
+          <span class="tag-hybrid text-red-500">Stability</span>
+        </h3>
+        <table class="spec-table">
+          <tr>
+            <td class="spec-label">Processor</td>
+            <td class="mono">x86_64-v3 // 2.0GHz+</td>
+          </tr>
+          <tr>
+            <td class="spec-label">Memory</td>
+            <td class="mono">4GB RAM (ECC Recommended)</td>
+          </tr>
+          <tr>
+            <td class="spec-label">Storage</td>
+            <td class="mono">60GB SSD (BTRFS Environment)</td>
+          </tr>
+          <tr>
+            <td class="spec-label">Graphics</td>
+            <td class="mono">UEFI Standard Compliant GPU</td>
+          </tr>
+        </table>
+        <p class="mt-6 text-[11px] text-slate-500 italic">:: Minimum specs allow for RHEL-core operations. Hybrid multitasking may see latency in atomic generation.</p>
+      </div>
+
+      <!-- RECOMMENDED -->
+      <div class="brutal-card p-8 border-cyan-400/30">
+        <h3 class="text-2xl font-black uppercase italic mb-6 tracking-tight flex justify-between items-center">
+          Optimal 
+          <span class="tag-hybrid text-cyan-400">Convergence</span>
+        </h3>
+        <table class="spec-table">
+          <tr>
+            <td class="spec-label">Processor</td>
+            <td class="mono">8-Core Modern Virtualization Silicon</td>
+          </tr>
+          <tr>
+            <td class="spec-label">Memory</td>
+            <td class="mono">16GB+ Dual-Channel Buffer</td>
+          </tr>
+          <tr>
+            <td class="spec-label">Storage</td>
+            <td class="mono">250GB+ NVMe Gen4 SSD</td>
+          </tr>
+          <tr>
+            <td class="spec-label">Kernel-Link</td>
+            <td class="mono">VT-x / AMD-V IOMMU Enabled</td>
+          </tr>
+        </table>
+        <p class="mt-6 text-[11px] text-cyan-500 italic">:: Optimal specs for atomic system generations and Arch-rolling development workloads with zero latency.</p>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE BREAKDOWN -->
+    <section class="space-y-12 mb-20">
+      <div>
+        <h3 class="text-xs mono text-cyan-500 font-bold uppercase tracking-[0.3em] mb-6 border-b border-white/10 pb-2 flex items-center gap-3">
+          <span class="status-dot"></span> 01_SILICON_ARCHITECTURE
+        </h3>
+        <div class="space-y-4">
+          <p class="text-sm text-slate-400 leading-relaxed font-light">
+            ArttulOS utilizes an <span class="text-white font-bold italic">x86_64-v3</span> instruction set baseline to ensure maximum performance across the RHEL binary shims and Arch rolling layers.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag-hybrid text-slate-400 border-white/10">✓ Intel Core (v3+)</span>
+            <span class="tag-hybrid text-slate-400 border-white/10">✓ AMD Ryzen / EPYC</span>
+            <span class="tag-hybrid text-red-500 border-red-500/30">✗ Legacy 32-bit (PURGED)</span>
+            <span class="tag-hybrid text-purple-500 border-purple-500/30">! ARM-64 (Experimental)</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-xs mono text-cyan-500 font-bold uppercase tracking-[0.3em] mb-6 border-b border-white/10 pb-2 flex items-center gap-3">
+          <span class="status-dot"></span> 02_GRAPHICS_PIPELINE
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 bg-slate-900 border border-white/5">
+            <h4 class="text-xs font-bold uppercase mb-2 text-white">Intel / AMD</h4>
+            <p class="text-[11px] text-slate-500">Native open-source drivers integrated into the Arttul kernel shim. Mesa-standard.</p>
+          </div>
+          <div class="p-4 bg-slate-900 border border-white/5">
+            <h4 class="text-xs font-bold uppercase mb-2 text-white">NVIDIA</h4>
+            <p class="text-[11px] text-slate-500">Proprietary RHEL-binary or Arch-DKMS modules enforced via PacNixum.</p>
+          </div>
+          <div class="p-4 bg-slate-900 border border-white/5">
+            <h4 class="text-xs font-bold uppercase mb-2 text-white">Acceleration</h4>
+            <p class="text-[11px] text-slate-500">Full KVM/QEMU and VMware guest acceleration support for isolated node clusters.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-xs mono text-cyan-500 font-bold uppercase tracking-[0.3em] mb-6 border-b border-white/10 pb-2 flex items-center gap-3">
+          <span class="status-dot"></span> 03_ATOMIC_STORAGE_LOGIC
+        </h3>
+        <div class="p-6 bg-black/50 border border-red-500/20 italic">
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Due to the <span class="text-white font-bold">Nix Atomic Store</span> architecture, ArttulOS maintains multiple system generations on-disk. We strictly enforce <span class="text-red-500 font-black uppercase">SSD storage</span>. Traditional spindle HDDs will suffer critical timeouts during symlink resolution.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SIDEBAR CHECKLIST -->
+  <aside class="w-full lg:w-80 space-y-8">
+    <div class="sidebar-sticky space-y-8">
+      
+      <div class="brutal-card p-6 bg-slate-900/40">
+        <h3 class="text-xs mono text-slate-500 uppercase mb-6 tracking-widest border-b border-white/5 pb-2">Pre_Flight_Handshake</h3>
+        <ul class="space-y-4 mono text-[11px] font-bold">
+          <li class="flex items-center gap-3"><span class="status-dot bg-emerald-500"></span> 64-BIT INSTRUCTION SET</li>
+          <li class="flex items-center gap-3"><span class="status-dot bg-emerald-500"></span> UEFI SECURE ENCLAVE</li>
+          <li class="flex items-center gap-3"><span class="status-dot bg-emerald-500"></span> AHCI / NVME BUS PROTOCOL</li>
+          <li class="flex items-center gap-3"><span class="status-dot bg-yellow-500"></span> TPM 2.0 (ENFORCED FOR RHEL)</li>
+        </ul>
+      </div>
+
+      <div class="brutal-card p-6 bg-cyan-950/20 border-cyan-500/30">
+        <h3 class="text-xs mono text-white font-bold uppercase mb-2">Acreetion Heritage</h3>
+        <p class="text-[11px] text-cyan-200/50 leading-relaxed mb-4">
+          ArttulOS maintains the uncompromising lightweight core of AcreetionOS while adding immutable enterprise compatibility.
+        </p>
+        <div class="text-[10px] mono font-bold text-white uppercase flex justify-between">
+            <span>Designer:</span>
+            <span class="text-cyan-400 italic">Natalie Spiva</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <a href="install.html" class="block w-full py-4 bg-cyan-400 text-black text-center font-black uppercase tracking-widest text-xs hover:bg-white transition-all">Initialize_Provisioning</a>
+        <a href="repo-sync.html" class="block w-full py-4 border border-white/10 text-slate-400 text-center mono uppercase text-[10px] hover:bg-white/5 transition">Verify_Repo_Sync</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/5 bg-black py-16 px-6">
+  <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center md:text-left">
+    <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-600">
+      <p class="mb-2">ArttulOS Technical Resource Matrix</p>
+      <p>Data_Revision: 2026.01.24</p>
+      <p>Provisioned by: Natalie Spiva (Lead Architect)</p>
+    </div>
+    
+    <div class="text-center">
+      <p class="text-xs mono font-bold text-cyan-500 mb-2 uppercase tracking-widest italic">Brought to you by the co-lead of AcreetionOS</p>
+      <p class="text-2xl font-black italic tracking-tighter uppercase leading-none">ArttulOS Project</p>
+    </div>
+
+    <div class="flex flex-col items-center md:items-end gap-2 text-[10px] mono uppercase text-slate-500">
+      <p>© 2026 Natalie Spiva. All Rights Reserved.</p>
+      <div class="flex space-x-4 font-bold">
+        <a href="#" class="hover:text-white transition">Hardware_DB</a>
+        <a href="faq.html" class="hover:text-white transition">Intel_Vault</a>
+        <a href="#" class="hover:text-white transition">Node_Status</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

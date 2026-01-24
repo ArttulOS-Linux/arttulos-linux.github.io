@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#030712] text-slate-200">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ArttulOS // The Sovereign Hybrid</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan-volt: #00f2ff;
+      --rhel-red: #ff3e3e;
+      --panel-bg: rgba(15, 23, 42, 0.8);
+    }
+    body { font-family: 'Space Grotesk', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    
+    .brutal-border {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 6px 6px 0px rgba(0, 242, 255, 0.1);
+    }
+    
+    .status-dot {
+      height: 8px; width: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* NixOS Generation Slider */
+    .gen-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: #1e293b;
+      outline: none;
+    }
+    .gen-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px; height: 15px;
+      background: var(--cyan-volt);
+      cursor: pointer;
+      border-radius: 0;
+    }
+
+    .glass-nav {
+      background: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .hero-glitch {
+      text-shadow: 2px 0 var(--rhel-red), -2px 0 var(--cyan-volt);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
+
+  <!-- TOP DASHBOARD HEADER -->
+  <nav class="glass-nav sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-4">
+        <div class="w-10 h-10 bg-cyan-400 text-black flex items-center justify-center font-black text-2xl">A</div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tighter leading-none uppercase">Arttul<span class="text-cyan-400">OS</span></h1>
+          <p class="text-[10px] mono text-cyan-500 font-bold uppercase tracking-widest">Brought to you by the co-lead of AcreetionOS</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-8 mono text-[11px] font-bold uppercase tracking-widest text-slate-400">
+        <a href="#" class="hover:text-white transition">Kernel_v6.8</a>
+        <a href="#" class="hover:text-white transition">Binary_Repo</a>
+        <a href="#" class="hover:text-white transition">Nix_Flakes</a>
+        <span class="text-emerald-500 flex items-center gap-2"><span class="status-dot bg-emerald-500"></span> System_Optimal</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 flex flex-col lg:flex-row max-w-[1600px] mx-auto w-full">
+    
+    <!-- LEFT SIDEBAR: THE ENGINE CONFIG -->
+    <aside class="w-full lg:w-96 p-6 border-r border-white/5 flex flex-col gap-6 bg-slate-950/20">
+      
+      <div class="p-6 brutal-border bg-slate-900/50">
+        <h2 class="text-xs mono text-slate-500 uppercase mb-4 tracking-widest">Package_Orchestration</h2>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center p-2 bg-black/40 border border-white/5">
+            <span class="text-sm">RHEL-9 Binary</span>
+            <span class="text-[10px] text-red-500 font-bold">STABLE</span>
+          </div>
+          <div class="flex justify-between items-center p-2 bg-black/40 border border-white/5">
+            <span class="text-sm">Arch/AUR Mirror</span>
+            <span class="text-[10px] text-cyan-400 font-bold">ROLLING</span>
+          </div>
+          <div class="flex justify-between items-center p-2 bg-black/40 border border-white/5">
+            <span class="text-sm">Nix Store (Atomic)</span>
+            <span class="text-[10px] text-purple-400 font-bold">IMMUTABLE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 brutal-border bg-slate-900/50">
+        <h2 class="text-xs mono text-slate-500 uppercase mb-4 tracking-widest">System_Generations</h2>
+        <div class="space-y-4">
+          <div class="flex justify-between text-[10px] mono">
+            <span>GEN_88 (Arch_State)</span>
+            <span class="text-cyan-400 italic">Current</span>
+          </div>
+          <input type="range" class="gen-slider" min="1" max="100" value="88">
+          <p class="text-[11px] text-slate-500 leading-snug">
+            ArttulOS creates an atomic filesystem snapshot before every transaction. Reverting is instant and non-destructive.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-auto p-4 border-t border-white/5">
+        <button class="w-full py-4 bg-cyan-400 text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all">
+          Pull Latest Build (v1.0.4)
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT: THE MONOLITH -->
+    <section class="flex-1 p-6 lg:p-12 overflow-y-auto">
+      
+      <!-- HERO -->
+      <div class="mb-24">
+        <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter italic mb-8 leading-[0.9] hero-glitch">
+          Enterprise <br>Stability. <br><span class="text-cyan-400">Chaos</span> Driven.
+        </h2>
+        <p class="text-xl text-slate-400 max-w-2xl leading-relaxed font-light">
+          ArttulOS is the biological child of five distinct ideologies. We provide the <span class="text-white font-bold border-b border-red-500">Long Term Support</span> of Rocky Linux with the <span class="text-white font-bold border-b border-cyan-400">Bleeding Edge</span> AUR compatibility of Arch. 
+        </p>
+      </div>
+
+      <!-- THE PHILOSOPHY GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-red-600 to-cyan-400 opacity-20 blur group-hover:opacity-40 transition"></div>
+          <div class="relative p-8 bg-slate-950 border border-white/10">
+            <h3 class="text-2xl font-bold uppercase italic mb-4">The PacNixum Engine</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              Why choose? PacNixum allows you to install RHEL RPMs for your production database, Arch packages for your dev-environment, and Nix-flakes for your system config—all managed through a single, lightning-fast interface.
+            </p>
+            <div class="mono text-[11px] text-cyan-400"># pacnixum install --layer=rhel postgresql</div>
+          </div>
+        </div>
+
+        <div class="relative group">
+          <div class="relative p-8 bg-slate-950 border border-white/10">
+            <h3 class="text-2xl font-bold uppercase italic mb-4">Acreetion Heritage</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              Born from the co-lead of AcreetionOS, ArttulOS inherits a brutalist design philosophy. No bloat, no forced telemetry, and an interface that stays out of the way of the professional.
+            </p>
+            <div class="mono text-[11px] text-red-500">AUTH: NATALIE_SPIVA // LEAD_DESIGN</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MOCK TERMINAL FEED -->
+      <div class="mt-20 p-6 bg-black border border-white/5 mono text-xs leading-relaxed text-slate-500">
+        <div class="flex space-x-2 mb-4">
+          <div class="w-2 h-2 bg-red-500"></div>
+          <div class="w-2 h-2 bg-yellow-500"></div>
+          <div class="w-2 h-2 bg-green-500"></div>
+        </div>
+        <div>[SYSTEM] Initializing ArttulOS Sovereign Mode...</div>
+        <div>[KERNEL] Loading RHEL-9-Binary compatibility shim... <span class="text-cyan-400">OK</span></div>
+        <div>[PKG] Syncing AUR repository via multi-threaded pacman... <span class="text-cyan-400">OK</span></div>
+        <div class="text-white mt-2">arttul@monolith:~$ pacnixum --version</div>
+        <div class="text-emerald-400 italic">pacnixum v2.4.1 (Acreetion-Arch-Hybrid Engine)</div>
+        <div class="animate-pulse mt-1">_</div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 bg-black px-8 py-10">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+      <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+        <p class="mb-2">ArttulOS Hybrid Architecture</p>
+        <p>Deployment: 2026.01.24</p>
+        <p>Status: Production Ready</p>
+      </div>
+      
+      <div class="text-center">
+        <p class="text-xs mono font-bold text-cyan-500 mb-2 uppercase tracking-widest">Brought to you by the co-lead of AcreetionOS</p>
+        <p class="text-lg font-black italic tracking-tighter uppercase">ArttulOS Project</p>
+      </div>
+
+      <div class="flex flex-col items-end gap-2 text-[10px] mono uppercase text-slate-600">
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-white transition">PGP_Keys</a>
+          <a href="#" class="hover:text-white transition">Audit_Logs</a>
+          <a href="#" class="hover:text-white transition">Infrastructure</a>
+        </div>
+        <p>© 2026 Natalie Spiva. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
