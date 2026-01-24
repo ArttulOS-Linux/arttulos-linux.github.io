@@ -1,0 +1,15 @@
+{
+  "name": "arttulos-website",
+  "version": "1.0.0",
+  "description": "ArttulOS Linux official website",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:firefox": "playwright test --project=firefox",
+    "test:ui": "playwright test --ui",
+    "install:browsers": "playwright install firefox"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}
