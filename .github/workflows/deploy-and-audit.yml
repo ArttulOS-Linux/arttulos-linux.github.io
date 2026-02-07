@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages and run audits
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v1
+
+      - name: Determine site URL
+        id: site
+        run: |
+          if [ -f CNAME ]; then
+            echo "SITE_URL=https://$(cat CNAME)" >> $GITHUB_OUTPUT
+          else
+            OWNER=${GITHUB_REPOSITORY%/*}
+            REPO=${GITHUB_REPOSITORY#*/}
+            echo "SITE_URL=https://$OWNER.github.io/$REPO" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Lighthouse and Pa11y
+        run: npm install -g lighthouse pa11y
+
+      - name: Run Lighthouse (JSON)
+        run: lighthouse "${{ steps.site.outputs.SITE_URL }}" --output=json --output-path=baseline-lighthouse.json --chrome-flags="--no-sandbox --headless" || true
+
+      - name: Run Pa11y (JSON)
+        run: pa11y "${{ steps.site.outputs.SITE_URL }}" --reporter json > baseline-pa11y.json || true
+
+      - name: Upload audit artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: audits
+          path: |
+            baseline-lighthouse.json
+            baseline-pa11y.json
