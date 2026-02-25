@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#030712] text-slate-200">
+<html lang="en" class="bg-[#000000] text-slate-200">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,53 +13,62 @@
 
     <style>
         :root {
-            --cyan-volt: #00f2ff;
-            --rhel-red: #ff3e3e;
-            --bg-void: #030712;
-            --panel-slate: #0f172a;
+            --accent-white: #ffffff;
+            --accent-grey: #4b5563;
+            --bg-void: #000000;
+            --panel-slate: #0a0a0a;
         }
 
-        body { font-family: 'Space Grotesk', sans-serif; }
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #000; }
         .mono { font-family: 'JetBrains Mono', monospace; }
         
         .brutal-card {
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(10, 10, 10, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .brutal-card:hover {
-            border-color: var(--cyan-volt);
-            box-shadow: 4px 4px 0px var(--cyan-volt);
+            border-color: #fff;
+            box-shadow: 4px 4px 0px #fff;
             transform: translate(-2px, -2px);
         }
 
         #repo-search {
             background: #000;
             border: 1px solid rgba(255,255,255,0.1);
-            color: var(--cyan-volt);
+            color: #fff;
             font-family: 'JetBrains Mono', monospace;
         }
         #repo-search:focus {
-            border-color: var(--cyan-volt);
+            border-color: #fff;
             outline: none;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .active-badge {
-            background: rgba(0, 242, 255, 0.1);
-            color: var(--cyan-volt);
-            border: 1px solid var(--cyan-volt);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid #fff;
             font-size: 10px;
             padding: 2px 6px;
             font-weight: bold;
             text-transform: uppercase;
         }
 
+        .acreetion-badge {
+            border: 1px solid #ffffff;
+            padding: 2px 8px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: bold;
+        }
+
         #modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             backdrop-filter: blur(10px);
             z-index: 9999;
             justify-content: center;
@@ -68,34 +77,44 @@
         }
 
         .modal-container {
-            background: #0a0f1d;
-            border: 1px solid var(--cyan-volt);
+            background: #0a0a0a;
+            border: 1px solid #fff;
             width: 100%;
             max-width: 800px;
             position: relative;
         }
 
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--cyan-volt); }
+        ::-webkit-scrollbar-thumb { background: #fff; }
     </style>
 </head>
-<body class="selection:bg-cyan-500 selection:text-black">
+<body class="selection:bg-white selection:text-black">
+
+    <!-- WIP STATUS BAR -->
+    <div class="bg-white text-black py-1 px-6 text-center text-[10px] mono font-bold uppercase tracking-[0.3em] relative z-[1000]">
+      System_Status: Development_Active // [NOT_DEPLOYMENT_READY] // Project_Alpha
+    </div>
 
     <!-- HEADER HUD -->
-    <header class="border-b border-white/5 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
+    <header class="border-b border-white/10 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-cyan-400 text-black flex items-center justify-center font-black text-2xl rotate-45 border border-white">A</div>
+                <div class="w-10 h-10 bg-white text-black flex items-center justify-center font-black text-2xl border border-white">A</div>
                 <div>
-                    <h1 class="text-xl font-bold tracking-tighter leading-none uppercase">Arttul<span class="text-cyan-400">OS</span></h1>
-                    <p class="text-[9px] mono text-cyan-600 font-bold uppercase tracking-widest">Brought to you by the co-lead of AcreetionOS</p>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl font-bold tracking-tighter leading-none uppercase text-white">Arttul<span class="text-slate-500">OS</span></h1>
+                        <span class="acreetion-badge">Acreetion Affiliate</span>
+                    </div>
+                    <p class="text-[9px] mono text-slate-600 font-bold uppercase tracking-widest">Powered by Acreetion Technology</p>
                 </div>
             </div>
             <nav class="hidden md:flex space-x-8 mono text-[11px] font-bold uppercase tracking-widest text-slate-400">
-                <a href="index.html" class="hover:text-cyan-400 transition">Dashboard</a>
-                <a href="install.html" class="hover:text-cyan-400 transition">Provisioning</a>
-                <a href="#" class="text-cyan-400 border-b border-cyan-400">Repo_Sync</a>
-                <a href="contact.html" class="hover:text-cyan-400 transition">Nexus</a>
+                <a href="index.html" class="hover:text-white transition">Dashboard</a>
+                <a href="install.html" class="hover:text-white transition">Provisioning</a>
+                <a href="#" class="text-white border-b border-white">Repo_Sync</a>
+                <a href="faq.html" class="hover:text-white transition">Intel_Database</a>
+                <a href="developers.html" class="hover:text-white transition">The_Architect</a>
+                <a href="contact.html" class="hover:text-white transition">Nexus</a>
             </nav>
         </div>
     </header>
@@ -105,10 +124,10 @@
         <main>
             <!-- HERO -->
             <section class="mb-12">
-                <div class="inline-block px-2 py-1 bg-red-600/20 border border-red-500 text-red-500 text-[10px] mono font-bold uppercase tracking-[0.3em] mb-4">
+                <div class="inline-block px-2 py-1 bg-white/10 border border-white/30 text-white text-[10px] mono font-bold uppercase tracking-[0.3em] mb-4">
                     Source Target: arttulos-linux
                 </div>
-                <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-6">Source_<span class="text-cyan-400">Tracker</span>.</h2>
+                <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-6 text-white">Source_<span class="text-slate-500">Tracker</span>.</h2>
                 <p class="text-xl text-slate-400 max-w-2xl leading-relaxed mb-8">
                     Monitoring the development lifecycle of the ArttulOS Project. Our repositories host the core PacNixum engine, the RHEL compatibility shim, and our atomic Nix configurations.
                 </p>
@@ -116,15 +135,15 @@
                 <div class="flex flex-col md:flex-row gap-4 mb-8">
                     <input type="text" id="repo-search" class="flex-1 p-4 text-sm" placeholder="QUERY_REPOSITORY_MANIFEST...">
                     <div class="flex gap-2">
-                        <button id="show-active" class="px-6 py-4 bg-cyan-400 text-black font-black uppercase text-xs tracking-widest hover:bg-white transition-all">Pulse_Sync</button>
-                        <button id="show-all" class="px-6 py-4 border border-white/20 mono text-xs uppercase hover:bg-white/10 transition-all">Show_All</button>
+                        <button id="show-active" class="px-6 py-4 bg-white text-black font-black uppercase text-xs tracking-widest hover:bg-slate-300 transition-all">Pulse_Sync</button>
+                        <button id="show-all" class="px-6 py-4 border border-white/20 mono text-xs uppercase hover:bg-white/10 transition-all text-white">Show_All</button>
                     </div>
                 </div>
             </section>
 
             <!-- REPO LIST -->
             <div class="space-y-4">
-                <div id="loading-status" class="mono text-cyan-500 animate-pulse text-xs uppercase tracking-widest">:: Establishing Connection to ArttulOS Git Nodes...</div>
+                <div id="loading-status" class="mono text-white animate-pulse text-xs uppercase tracking-widest">:: Establishing Connection to ArttulOS Git Nodes...</div>
                 <div id="repo-list" class="grid grid-cols-1 gap-4">
                     <!-- JS Injected -->
                 </div>
@@ -133,7 +152,7 @@
 
         <!-- SIDEBAR -->
         <aside class="space-y-8">
-            <div class="p-6 brutal-card bg-slate-900/40">
+            <div class="p-6 brutal-card bg-[#0a0a0a]/40">
                 <h3 class="text-xs mono text-slate-500 uppercase mb-4 tracking-widest">Global_Status</h3>
                 <div class="space-y-4 mono text-[11px]">
                     <div class="flex justify-between border-b border-white/5 pb-2">
@@ -142,22 +161,22 @@
                     </div>
                     <div class="flex justify-between border-b border-white/5 pb-2">
                         <span class="text-slate-500">ENGINE_SYNC</span>
-                        <span class="text-emerald-500">OPTIMAL</span>
+                        <span class="text-white">OPTIMAL</span>
                     </div>
                     <div class="flex justify-between border-b border-white/5 pb-2">
                         <span class="text-slate-500">ARCH_AUR_LINK</span>
-                        <span class="text-cyan-400">ENFORCED</span>
+                        <span class="text-white">ENFORCED</span>
                     </div>
                 </div>
             </div>
 
-            <div class="p-6 brutal-card bg-cyan-950/20 border-cyan-500/30">
+            <div class="p-6 brutal-card bg-white/5 border-white/20">
                 <h3 class="text-xs mono text-white font-bold uppercase mb-2">Heritage_Core</h3>
                 <p class="text-[11px] text-slate-400 leading-relaxed italic">
-                    "ArttulOS is the fusion of stability and freedom, engineered by the co-lead of AcreetionOS to define the next era of personal computing."
+                    "ArttulOS is the fusion of stability and freedom, solely created by the co-lead of AcreetionOS to explore the next era of personal computing."
                 </p>
-                <div class="mt-4 text-[10px] mono font-bold text-cyan-400 uppercase">
-                    Architect: Natalie Spiva
+                <div class="mt-4 text-[10px] mono font-bold text-white uppercase">
+                    Sole Architect: Natalie Spiva
                 </div>
             </div>
         </aside>
@@ -166,7 +185,7 @@
     <!-- MODAL -->
     <div id="modal">
         <div class="modal-container p-8 brutal-card">
-            <button class="absolute top-4 right-4 text-cyan-400 text-3xl font-light hover:text-white" onclick="document.getElementById('modal').style.display='none'">×</button>
+            <button class="absolute top-4 right-4 text-white text-3xl font-light hover:text-slate-300" onclick="document.getElementById('modal').style.display='none'">×</button>
             <div id="modal-body">
                 <!-- JS Content -->
             </div>
@@ -174,15 +193,15 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="border-t border-white/5 bg-black py-12 px-6">
+    <footer class="border-t border-white/10 bg-black py-12 px-6">
         <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
-                <p class="text-[10px] mono text-cyan-600 font-bold uppercase tracking-widest mb-1">Brought to you by the co-lead of AcreetionOS</p>
-                <p class="text-[10px] text-slate-600 mono uppercase tracking-widest">RHEL Binary Compatibility // Arch Fast-Rolling // Nix Repro</p>
+                <p class="text-[10px] mono text-white font-bold uppercase tracking-widest mb-1">Just made by Natalie Spiva // Co-Lead of AcreetionOS</p>
+                <p class="text-[10px] text-slate-500 mono uppercase tracking-widest">RHEL Binary Compatibility // Arch Fast-Rolling // Nix Repro</p>
             </div>
             <div class="text-center md:text-right">
-                <p class="text-[10px] mono text-slate-500 mb-2 uppercase">Project Status: LIVE</p>
-                <p class="text-sm font-black italic tracking-tighter uppercase">© 2026 Natalie Spiva. All Rights Reserved.</p>
+                <p class="text-[10px] mono text-slate-500 mb-2 uppercase">Project Status: ALPHA</p>
+                <p class="text-sm font-black italic tracking-tighter uppercase text-white">© 2026 Natalie Spiva. Solely created by Natalie Spiva.</p>
             </div>
         </div>
     </footer>
@@ -206,7 +225,7 @@
                 loadingEl.style.display = 'none';
                 renderRepos(allRepos);
             } catch (err) {
-                loadingEl.innerHTML = "<span class='text-red-500'>CRITICAL_SYNC_ERROR: UNABLE TO REACH ARTTUL GIT NODES.</span>";
+                loadingEl.innerHTML = "<span class='text-white'>CRITICAL_SYNC_ERROR: UNABLE TO REACH ARTTUL GIT NODES.</span>";
             }
         }
 
@@ -228,14 +247,14 @@
                 card.innerHTML = `
                     <div class="space-y-1">
                         <div class="flex items-center gap-3">
-                            <h3 class="text-lg font-bold uppercase italic tracking-tight group-hover:text-cyan-400 transition-colors">${repo.name}</h3>
-                            ${isRecent ? '<span class="active-badge">Sync_Active</span>' : ''}
+                            <h3 class="text-lg font-bold uppercase italic tracking-tight group-hover:text-white transition-colors text-white">${repo.name}</h3>
+                            \${isRecent ? '<span class="active-badge">Sync_Active</span>' : ''}
                         </div>
-                        <p class="text-xs text-slate-500 max-w-lg truncate">${repo.description || 'System manifest: No description provided.'}</p>
+                        <p class="text-xs text-slate-500 max-w-lg truncate">\${repo.description || 'System manifest: No description provided.'}</p>
                     </div>
                     <div class="hidden md:flex items-center gap-6 mono text-[10px] uppercase font-bold">
-                        <span class="text-slate-600">STARS: <span class="text-cyan-400">${repo.stargazers_count}</span></span>
-                        <span class="text-slate-600">CORE: <span class="text-white">${repo.language || 'Hybrid'}</span></span>
+                        <span class="text-slate-600">STARS: <span class="text-white">\${repo.stargazers_count}</span></span>
+                        <span class="text-slate-600">CORE: <span class="text-white">\${repo.language || 'Hybrid'}</span></span>
                     </div>
                 `;
                 repoListEl.appendChild(card);
@@ -246,20 +265,20 @@
             const body = document.getElementById('modal-body');
             modalEl.style.display = 'flex';
             body.innerHTML = `
-                <h2 class="text-3xl font-black uppercase italic mb-2 tracking-tighter">${repo.name}</h2>
-                <p class="text-slate-400 mb-6 text-sm italic font-light">${repo.description || 'No system manifest description available.'}</p>
+                <h2 class="text-3xl font-black uppercase italic mb-2 tracking-tighter text-white">\${repo.name}</h2>
+                <p class="text-slate-400 mb-6 text-sm italic font-light">\${repo.description || 'No system manifest description available.'}</p>
                 <div class="flex flex-wrap gap-4 mb-8">
-                    <a href="${repo.html_url}" target="_blank" class="px-6 py-3 bg-white text-black font-black uppercase text-[10px] tracking-widest hover:bg-cyan-400 transition-colors">Access_Source</a>
-                    <a href="${repo.html_url}/issues" target="_blank" class="px-6 py-3 border border-white/20 mono uppercase text-[10px] tracking-widest hover:bg-white/10 transition-colors">Bug_Tracker</a>
+                    <a href="\${repo.html_url}" target="_blank" class="px-6 py-3 bg-white text-black font-black uppercase text-[10px] tracking-widest hover:bg-slate-300 transition-colors">Access_Source</a>
+                    <a href="\${repo.html_url}/issues" target="_blank" class="px-6 py-3 border border-white/20 mono uppercase text-[10px] tracking-widest hover:bg-white/10 transition-colors text-white">Bug_Tracker</a>
                 </div>
-                <h3 class="text-xs mono text-cyan-500 uppercase mb-4 tracking-[0.2em] font-bold">Latest_Commit_Log</h3>
-                <div id="modal-loading" class="mono text-[10px] animate-pulse">:: Parsing Repository History...</div>
+                <h3 class="text-xs mono text-white uppercase mb-4 tracking-[0.2em] font-bold">Latest_Commit_Log</h3>
+                <div id="modal-loading" class="mono text-[10px] animate-pulse text-white">:: Parsing Repository History...</div>
                 <ul id="modal-commits" class="space-y-4 mono text-[11px]"></ul>
             `;
 
             try {
                 // Fetching commits specifically for the clicked repo
-                const res = await fetch(`https://api.github.com/repos/${GITHUB_ORG}/${repo.name}/commits?per_page=5`);
+                const res = await fetch(`https://api.github.com/repos/\${GITHUB_ORG}/\${repo.name}/commits?per_page=5`);
                 const commits = await res.json();
                 document.getElementById('modal-loading').style.display = 'none';
                 const list = document.getElementById('modal-commits');
@@ -268,14 +287,14 @@
                     list.innerHTML = commits.map(c => `
                         <li class="border-b border-white/5 pb-3">
                             <div class="flex justify-between items-center mb-1">
-                                <span class="text-white font-bold uppercase tracking-tighter">Auth: ${c.commit.author.name}</span>
-                                <span class="text-[9px] text-slate-600">${new Date(c.commit.author.date).toLocaleDateString()}</span>
+                                <span class="text-white font-bold uppercase tracking-tighter">Auth: \${c.commit.author.name}</span>
+                                <span class="text-[9px] text-slate-600">\${new Date(c.commit.author.date).toLocaleDateString()}</span>
                             </div>
-                            <span class="text-slate-500 italic">${c.commit.message.split('\n')[0]}</span>
+                            <span class="text-slate-500 italic">\${c.commit.message.split('\\n')[0]}</span>
                         </li>
                     `).join('');
                 } else {
-                    list.innerHTML = '<li class="text-red-500 uppercase font-bold">Commit Load Error: API_Limit_Reached</li>';
+                    list.innerHTML = '<li class="text-white uppercase font-bold">Commit Load Error: API_Limit_Reached</li>';
                 }
             } catch(e) {
                 document.getElementById('modal-loading').innerText = "FATAL: FAILED TO PARSE HISTORY.";

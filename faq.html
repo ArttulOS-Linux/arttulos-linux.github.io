@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#030712] text-slate-200">
+<html lang="en" class="bg-[#000000] text-slate-200">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --cyan-volt: #00f2ff;
-  --rhel-red: #ff3e3e;
-  --bg-void: #030712;
+  --accent-white: #ffffff;
+  --accent-grey: #4b5563;
+  --bg-void: #000000;
 }
 
-body { font-family: 'Space Grotesk', sans-serif; }
+body { font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-void); }
 .mono { font-family: 'JetBrains Mono', monospace; }
 
 .brutal-card {
-  background: rgba(15, 23, 42, 0.4);
+  background: rgba(10, 10, 10, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 4px 4px 0px rgba(0, 242, 255, 0.05);
+  box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.05);
 }
 
 /* FAQ Collapsible Logic */
@@ -33,8 +33,8 @@ body { font-family: 'Space Grotesk', sans-serif; }
   padding: 1.5rem 0;
 }
 .faq-question:hover {
-  color: var(--cyan-volt);
-  background: rgba(0, 242, 255, 0.02);
+  color: var(--accent-white);
+  background: rgba(255, 255, 255, 0.02);
 }
 .faq-answer {
   max-height: 0;
@@ -52,23 +52,23 @@ body { font-family: 'Space Grotesk', sans-serif; }
 
 .status-dot {
   height: 6px; width: 6px;
-  background: var(--cyan-volt);
+  background: var(--accent-white);
   display: inline-block;
-  box-shadow: 0 0 8px var(--cyan-volt);
+  box-shadow: 0 0 8px var(--accent-white);
 }
 
 code {
   background: #000;
-  color: var(--cyan-volt);
+  color: #fff;
   padding: 2px 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9em;
-  border: 1px solid rgba(0, 242, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 pre {
   background: #000;
-  border-left: 2px solid var(--cyan-volt);
+  border-left: 2px solid #fff;
   padding: 1rem;
   margin: 1rem 0;
   overflow-x: auto;
@@ -83,8 +83,17 @@ pre {
   border: 1px solid currentColor;
 }
 
+.acreetion-badge {
+  border: 1px solid #ffffff;
+  padding: 2px 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-thumb { background: var(--cyan-volt); }
+::-webkit-scrollbar-thumb { background: #fff; }
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -99,24 +108,33 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </head>
-<body class="selection:bg-cyan-500 selection:text-black">
+<body class="selection:bg-white selection:text-black">
+
+<!-- WIP STATUS BAR -->
+<div class="bg-white text-black py-1 px-6 text-center text-[10px] mono font-bold uppercase tracking-[0.3em]">
+  System_Status: Development_Active // [NOT_DEPLOYMENT_READY] // Project_Alpha
+</div>
 
 <!-- HEADER HUD -->
-<header class="border-b border-white/5 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
+<header class="border-b border-white/10 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
   <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
     <div class="flex items-center space-x-4">
-      <div class="w-10 h-10 bg-cyan-400 text-black flex items-center justify-center font-black text-2xl rotate-45 border border-white">A</div>
+      <div class="w-10 h-10 bg-white text-black flex items-center justify-center font-black text-2xl border border-white">A</div>
       <div>
-        <h1 class="text-xl font-bold tracking-tighter leading-none uppercase">Arttul<span class="text-cyan-400">OS</span></h1>
-        <p class="text-[9px] mono text-cyan-600 font-bold uppercase tracking-widest">Brought to you by the co-lead of AcreetionOS</p>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl font-bold tracking-tighter leading-none uppercase">Arttul<span class="text-slate-500">OS</span></h1>
+          <span class="acreetion-badge">Acreetion Affiliate</span>
+        </div>
+        <p class="text-[9px] mono text-slate-600 font-bold uppercase tracking-widest">Powered by Acreetion Technology</p>
       </div>
     </div>
     <nav class="hidden md:flex space-x-8 mono text-[11px] font-bold uppercase tracking-widest text-slate-400">
       <a href="index.html" class="hover:text-white transition">Dashboard</a>
       <a href="install.html" class="hover:text-white transition">Provisioning</a>
       <a href="repo-sync.html" class="hover:text-white transition">Repo_Sync</a>
-      <a href="blog.html" class="hover:text-white transition">Intelligence_Stream</a>
-      <a href="#" class="text-cyan-400 border-b border-cyan-400">Intel_Database</a>
+      <a href="developers.html" class="hover:text-white transition">The_Architect</a>
+      <a href="contact.html" class="hover:text-white transition">Nexus_Link</a>
+      <a href="#" class="text-white border-b border-white">Intel_Database</a>
     </nav>
   </div>
 </header>
@@ -127,10 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
   <main class="flex-1">
     <div class="mb-12">
       <div class="flex items-center gap-4 mb-4">
-        <span class="hud-tag text-cyan-400 border-cyan-400/30">Knowledge_Base_Access</span>
-        <span class="hud-tag text-red-500 border-red-500/30">Auth: Natalie_Spiva</span>
+        <span class="hud-tag text-white border-white/30">Knowledge_Base_Access</span>
+        <span class="hud-tag text-slate-500 border-slate-500/30">Auth: Natalie_Spiva</span>
       </div>
-      <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-6">Intel_<span class="text-cyan-400">Database</span>.</h2>
+      <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-6 text-white">Intel_<span class="text-slate-500">Database</span>.</h2>
       <p class="text-xl text-slate-400 max-w-2xl leading-relaxed italic font-light">
         Deconstructing the Sovereign Hybrid. Documentation regarding the convergence of RHEL stability, Arch velocity, and Nix reproducibility.
       </p>
@@ -138,14 +156,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <!-- CATEGORY: ARCHITECTURE -->
     <section class="mb-16">
-      <h3 class="text-xs mono text-cyan-500 font-bold uppercase tracking-[0.3em] mb-8 border-b border-white/10 pb-2 flex items-center gap-2">
+      <h3 class="text-xs mono text-white font-bold uppercase tracking-[0.3em] mb-8 border-b border-white/10 pb-2 flex items-center gap-2">
         <span class="status-dot"></span> 01. THE_CONVERGENCE
       </h3>
       
       <div class="faq-item">
         <div class="faq-question">
           <span class="font-bold text-xl uppercase italic tracking-tight">What is the biological child of five ideologies?</span>
-          <span class="mono text-cyan-500 icon text-sm">[ + ]</span>
+          <span class="mono text-white icon text-sm">[ + ]</span>
         </div>
         <div class="faq-answer">
           <p>ArttulOS is the biological child of <strong>AcreetionOS, Arch, Nix, RHEL, and Rocky Linux</strong>. It inherits Acreetion's brutalist transparency, RHEL/Rocky's immutable stability, Arch's multi-threaded velocity, and Nix's mathematical reproducibility. It is not a wrapper; it is a fundamental reconfiguration of the Linux ecosystem.</p>
@@ -154,18 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <div class="faq-item">
         <div class="faq-question">
-          <span class="font-bold text-xl uppercase italic tracking-tight">How is Natalie Spiva involved?</span>
-          <span class="mono text-cyan-500 icon text-sm">[ + ]</span>
+          <span class="font-bold text-xl uppercase italic tracking-tight text-white">How is Natalie Spiva involved?</span>
+          <span class="mono text-white icon text-sm">[ + ]</span>
         </div>
         <div class="faq-answer">
-          <p>ArttulOS is brought to you by the <strong>Co-Lead of AcreetionOS</strong>, Natalie Spiva. The project maintains the same uncompromising brutalist values and security-first design philosophy of Acreetion while introducing a high-density, multi-layer engine for enterprise-desktop convergence.</p>
+          <p>ArttulOS is just made by <strong>Natalie Spiva</strong>, Co-Lead of AcreetionOS. This project is her personal exploration of hybrid architecture, maintaining the uncompromising brutalist values and security-first design philosophy of the Acreetion ecosystem.</p>
         </div>
       </div>
 
       <div class="faq-item">
         <div class="faq-question">
-          <span class="font-bold text-xl uppercase italic tracking-tight">What is the PacNixum Engine?</span>
-          <span class="mono text-cyan-500 icon text-sm">[ + ]</span>
+          <span class="font-bold text-xl uppercase italic tracking-tight text-white">What is the PacNixum Engine?</span>
+          <span class="mono text-white icon text-sm">[ + ]</span>
         </div>
         <div class="faq-answer">
           <p>PacNixum is our custom-built orchestration layer. It allows the system to resolve dependencies across three distinct formats simultaneously:</p>
@@ -180,14 +198,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <!-- CATEGORY: PROVISIONING -->
     <section class="mb-16">
-      <h3 class="text-xs mono text-cyan-500 font-bold uppercase tracking-[0.3em] mb-8 border-b border-white/10 pb-2 flex items-center gap-2">
+      <h3 class="text-xs mono text-white font-bold uppercase tracking-[0.3em] mb-8 border-b border-white/10 pb-2 flex items-center gap-2">
         <span class="status-dot"></span> 02. PROVISIONING_&_LOGIC
       </h3>
 
       <div class="faq-item">
         <div class="faq-question">
-          <span class="font-bold text-xl uppercase italic tracking-tight">How do I manage the hybrid layers?</span>
-          <span class="mono text-cyan-500 icon text-sm">[ + ]</span>
+          <span class="font-bold text-xl uppercase italic tracking-tight text-white">How do I manage the hybrid layers?</span>
+          <span class="mono text-white icon text-sm">[ + ]</span>
         </div>
         <div class="faq-answer">
           <p>The <code>pacnixum</code> command is the primary interface. It detects the best source layer automatically or allows you to specify one.</p>
@@ -202,8 +220,8 @@ pacnixum install --layer=aur spotify</code></pre>
 
       <div class="faq-item">
         <div class="faq-question">
-          <span class="font-bold text-xl uppercase italic tracking-tight">How do Generations and Rollbacks work?</span>
-          <span class="mono text-cyan-500 icon text-sm">[ + ]</span>
+          <span class="font-bold text-xl uppercase italic tracking-tight text-white">How do Generations and Rollbacks work?</span>
+          <span class="mono text-white icon text-sm">[ + ]</span>
         </div>
         <div class="faq-answer">
           <p>Borrowing from NixOS logic, every system change creates a new <strong>Generation</strong>. If a configuration change or update breaks your environment, you can select any previous generation at the bootloader (GRUB/Systemd-boot) to instantly revert the entire system state. Rollbacks are a human right.</p>
@@ -213,14 +231,14 @@ pacnixum install --layer=aur spotify</code></pre>
 
     <!-- CATEGORY: SECURITY -->
     <section class="mb-16">
-      <h3 class="text-xs mono text-red-500 font-bold uppercase tracking-[0.3em] mb-8 border-b border-white/10 pb-2 flex items-center gap-2">
-        <span class="status-dot bg-red-500"></span> 03. SOVEREIGN_SECURITY
+      <h3 class="text-xs mono text-slate-500 font-bold uppercase tracking-[0.3em] mb-8 border-b border-white/10 pb-2 flex items-center gap-2">
+        <span class="status-dot bg-slate-500"></span> 03. SOVEREIGN_SECURITY
       </h3>
 
       <div class="faq-item">
         <div class="faq-question">
-          <span class="font-bold text-xl uppercase italic tracking-tight">Does ArttulOS support SELinux?</span>
-          <span class="mono text-cyan-500 icon text-sm">[ + ]</span>
+          <span class="font-bold text-xl uppercase italic tracking-tight text-white">Does ArttulOS support SELinux?</span>
+          <span class="mono text-white icon text-sm">[ + ]</span>
         </div>
         <div class="faq-answer">
           <p>Yes. ArttulOS ships with <strong>SELinux in Enforcing Mode</strong> by default, maintaining RHEL/Rocky security standards. We also provide "Acreetion-Hardened" kernel profiles that reduce the attack surface by disabling unnecessary kernel modules at the source.</p>
@@ -231,45 +249,45 @@ pacnixum install --layer=aur spotify</code></pre>
 
   <!-- SIDEBAR RESOURCE PANEL -->
   <aside class="w-full lg:w-80 space-y-8">
-    <div class="p-6 brutal-card bg-slate-900/40 sticky top-28">
-      <h3 class="text-xs mono text-slate-500 uppercase mb-4 tracking-widest border-b border-white/5 pb-2">Rapid_Intel</h3>
+    <div class="p-6 brutal-card bg-[#0a0a0a]/40 sticky top-28">
+      <h3 class="text-xs mono text-slate-500 uppercase mb-4 tracking-widest border-b border-white/10 pb-2">Rapid_Intel</h3>
       <ul class="space-y-3 mono text-[11px] font-bold uppercase">
-        <li><a href="index.html" class="text-cyan-400 hover:text-white transition">:: 01_Architecture</a></li>
-        <li><a href="install.html" class="text-cyan-400 hover:text-white transition">:: 02_Provisioning</a></li>
-        <li><a href="repo-sync.html" class="text-cyan-400 hover:text-white transition">:: 03_Repo_Sync</a></li>
-        <li><a href="blog.html" class="text-cyan-400 hover:text-white transition">:: 04_Latest_Logs</a></li>
+        <li><a href="index.html" class="text-white hover:text-slate-300 transition">:: 01_Architecture</a></li>
+        <li><a href="install.html" class="text-white hover:text-slate-300 transition">:: 02_Provisioning</a></li>
+        <li><a href="repo-sync.html" class="text-white hover:text-slate-300 transition">:: 03_Repo_Sync</a></li>
+        <li><a href="blog.html" class="text-white hover:text-slate-300 transition">:: 04_Latest_Logs</a></li>
       </ul>
       
-      <div class="mt-8 pt-8 border-t border-white/5">
+      <div class="mt-8 pt-8 border-t border-white/10">
         <h3 class="text-xs mono text-white uppercase mb-4 font-black">Direct_Support</h3>
         <p class="text-[11px] text-slate-500 leading-relaxed mb-6">
           For anomalies not listed in the database, establish a secure connection with the Arttul Nexus.
         </p>
-        <a href="contact.html" class="block w-full py-3 bg-cyan-400 text-black text-center font-black uppercase tracking-widest text-[10px] hover:bg-white transition-colors">Establish_Contact</a>
+        <a href="contact.html" class="block w-full py-3 bg-white text-black text-center font-black uppercase tracking-widest text-[10px] hover:bg-slate-200 transition-colors">Establish_Contact</a>
       </div>
     </div>
   </aside>
 </div>
 
 <!-- FOOTER -->
-<footer class="border-t border-white/5 bg-black py-16 px-6">
+<footer class="border-t border-white/10 bg-black py-16 px-6">
   <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center md:text-left">
     <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-600">
       <p class="mb-2">ArttulOS Technical Manifest</p>
-      <p>Data_Revision: 2026.01.24</p>
+      <p>Data_Revision: 2026.02.25</p>
       <p>Sovereign Level: FIPS-3_COMPLIANT</p>
     </div>
     
     <div class="text-center">
-      <p class="text-xs mono font-bold text-cyan-500 mb-2 uppercase tracking-widest italic">Lead Architect: Natalie Spiva</p>
-      <p class="text-2xl font-black italic tracking-tighter uppercase">ArttulOS Project</p>
+      <p class="text-xs mono font-bold text-white mb-2 uppercase tracking-widest italic">Just made by Natalie Spiva // Co-Lead of AcreetionOS</p>
+      <p class="text-2xl font-black italic tracking-tighter uppercase text-white">ArttulOS Project</p>
     </div>
 
     <div class="flex flex-col items-center md:items-end gap-2 text-[10px] mono uppercase text-slate-500">
-      <p>© 2026 Natalie Spiva. All Rights Reserved.</p>
+      <p>© 2026 Natalie Spiva. Solely created by Natalie Spiva.</p>
       <div class="flex space-x-4">
-        <a href="#" class="hover:text-white transition">Kernel_PGP</a>
-        <a href="#" class="hover:text-white transition">Audit_Logs</a>
+        <a href="https://acreetionos.org" class="hover:text-white transition">AcreetionOS.org</a>
+        <a href="https://github.com/arttulos-linux" class="hover:text-white transition">Github</a>
         <a href="#" class="hover:text-white transition">Infrastructure</a>
       </div>
     </div>

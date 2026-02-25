@@ -1,12 +1,28 @@
-# AcreetionOS Website
+# ArttulOS Website
 
-Official website for AcreetionOS Linux, hosted via GitHub Pages.
+**⚠️ STATUS: PROJECT ALPHA // NOT DEPLOYMENT READY ⚠️**
+
+Official website for ArttulOS // The Sovereign Hybrid, a high-performance Linux environment combining RHEL, Arch, and Nix ideologies. 
+
+**Creator:** Just made by **Natalie Spiva**, Co-Lead of AcreetionOS. This is a solo project and personal endeavor.
+
+*Note: This project is under active development. Expect broken links, missing documentation, and frequent architectural shifts. It is not ready for production use or general deployment.*
+
+**Affiliation:** Proudly part of the [AcreetionOS Ecosystem](https://acreetionos.org).
 
 ## Tech Stack
 
-- Plain HTML5, CSS3, JavaScript (no framework)
+- Plain HTML5, Tailwind CSS (via CDN), JavaScript (no framework)
 - GitHub Pages deployment
-- Playwright for local Firefox testing
+- Playwright for local testing
+
+## Design Philosophy
+
+ArttulOS follows a **Brutalist Black** design scheme:
+- Pure Black (#000000) backgrounds
+- Monochromatic accents (White/Grey/Silver)
+- High-contrast typography using 'Space Grotesk' and 'JetBrains Mono'
+- Prominent branding as an AcreetionOS Affiliate
 
 ## Development
 
@@ -17,55 +33,30 @@ python3 -m http.server 8000
 # Visit http://localhost:8000
 ```
 
-### Local Firefox Testing
+### Local Testing
 
-**Prerequisites:** Node.js, npm, Firefox
-
-```bash
-cd /drive1/Projects/acreetionos-linux.github.io
-bash tests/run_firefox_local.sh
-```
-
-Or manually:
 ```bash
 npm install
-npm run test:firefox
+npx playwright test
 ```
-
-### CI/CD
-
-Automated checks on push/PR:
-- Link checking (Lychee)
-- HTML5 validation
-- Accessibility audits (pa11y-ci)
-
-**Note:** Firefox browser tests are local-only and do NOT run in CI.
 
 ## Structure
 
 ```
 .
-├── index.html          # Main landing page
-├── contact.html        # Contact & support page
-├── contact.js          # Contact form logic
-├── contact.css         # Contact page styles
-├── selfhelp.html       # Self-help tool
-├── wiki/               # Wiki content (if any)
-└── tests/              # Playwright tests (local Firefox)
+├── index.html          # Dashboard (Landing Page)
+├── contact.html        # Nexus (Contact)
+├── faq.html            # Intel Database (FAQ)
+├── install.html        # Provisioning (Installation)
+├── repo-sync.html      # Source Tracker (Git Tracker)
+├── requirements.html   # Resource Matrix (System Requirements)
+├── selfhelp.html       # Knowledge Engine (Search)
+└── tests/              # Playwright tests
 ```
 
 ## Deployment
 
-Automatic deployment to GitHub Pages from `main` branch.
-
-**Custom domain:** acreetionos.org (configured via CNAME)
-
-## Contributing
-
-1. Create a feature branch from `natalie` or `main`
-2. Make changes
-3. Test locally with Firefox: `bash tests/run_firefox_local.sh`
-4. Open PR
+Automatic deployment to GitHub Pages.
 
 ## License
 

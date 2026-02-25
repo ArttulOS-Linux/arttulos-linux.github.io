@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" class="bg-[#030712] text-slate-200">
+<html lang="en" class="bg-[#000000] text-slate-200">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -13,16 +12,16 @@
   
   <style>
     :root {
-      --cyan-volt: #00f2ff;
-      --rhel-red: #ff3e3e;
-      --bg-void: #030712;
+      --accent-white: #ffffff;
+      --accent-grey: #4b5563;
+      --bg-void: #000000;
     }
-    body { font-family: 'JetBrains Mono', monospace; overflow: hidden; }
+    body { font-family: 'JetBrains Mono', monospace; background-color: #000; overflow: hidden; }
     
     .terminal-box {
-      border: 1px solid rgba(0, 242, 255, 0.1);
-      background: rgba(15, 23, 42, 0.4);
-      box-shadow: 10px 10px 0px rgba(0, 242, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(10, 10, 10, 0.4);
+      box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
     }
 
@@ -38,7 +37,7 @@
     }
 
     .glitch {
-      text-shadow: 2px 0 var(--rhel-red), -2px 0 var(--cyan-volt);
+      text-shadow: 2px 0 #333, -2px 0 #666;
     }
 
     /* Brutalist Grid and Scanline Elements */
@@ -46,8 +45,8 @@
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
-      background-image: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), 
-                        linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), 
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       background-size: 50px 50px;
     }
 
@@ -58,7 +57,7 @@
     .scanline {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 2px;
-      background: rgba(0, 242, 255, 0.03);
+      background: rgba(255, 255, 255, 0.03);
       animation: scanline 10s linear infinite;
       pointer-events: none;
       z-index: 100;
@@ -66,17 +65,31 @@
 
     .logo-box {
       width: 40px; height: 40px;
-      background: var(--cyan-volt);
+      background: #fff;
       color: black;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 1.5rem; rotate: 45deg; border: 1px solid white;
+      font-weight: 900; font-size: 1.5rem; border: 1px solid white;
+    }
+
+    .acreetion-badge {
+      border: 1px solid #ffffff;
+      padding: 2px 8px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
     }
 
     ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-thumb { background: var(--cyan-volt); }
+    ::-webkit-scrollbar-thumb { background: #fff; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-6 selection:bg-cyan-500 selection:text-black">
+<body class="min-h-screen flex flex-col items-center justify-center p-6 selection:bg-white selection:text-black">
+
+  <!-- WIP STATUS BAR -->
+  <div class="fixed top-0 left-0 w-full bg-white text-black py-1 px-6 text-center text-[10px] mono font-bold uppercase tracking-[0.3em] z-[1000]">
+    System_Status: Development_Active // [NOT_DEPLOYMENT_READY] // Project_Alpha
+  </div>
 
   <div id="background-grid"></div>
   <div class="scanline"></div>
@@ -85,8 +98,11 @@
   <div class="absolute top-8 left-8 flex items-center space-x-6">
     <div class="logo-box">A</div>
     <div>
-      <span class="text-xl font-black uppercase tracking-tighter block leading-none">Arttul<span class="text-cyan-400">OS</span></span>
-      <p class="text-[9px] text-cyan-600 font-bold uppercase tracking-widest mt-1">Brought to you by the co-lead of AcreetionOS</p>
+      <div class="flex items-center gap-2">
+        <span class="text-xl font-black uppercase tracking-tighter block leading-none text-white">Arttul<span class="text-slate-500">OS</span></span>
+        <span class="acreetion-badge">Acreetion Affiliate</span>
+      </div>
+      <p class="text-[9px] text-slate-600 font-bold uppercase tracking-widest mt-1">Powered by Acreetion Technology</p>
     </div>
   </div>
 
@@ -95,16 +111,16 @@
     <div class="terminal-box p-8 md:p-12 relative">
       <div class="absolute top-0 right-0 p-4 text-[10px] text-slate-700 font-black uppercase tracking-widest">Protocol: Red_Migrate_v2.1</div>
       
-      <h1 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter mb-8 glitch leading-none">
-        Node_<br><span class="text-cyan-400">Relocated</span>.
+      <h1 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter mb-8 glitch leading-none text-white">
+        Node_<br><span class="text-slate-500">Relocated</span>.
       </h1>
       
       <div class="space-y-4 text-xs md:text-sm text-slate-400 leading-relaxed mb-10">
         <p class="text-white font-bold">:: Legacy data node has been successfully merged into the Sovereign Hybrid Mainnet.</p>
         <p>:: Initializing subspace link reroute to the Primary Node.</p>
-        <div class="flex items-center space-x-3 text-[10px] text-cyan-500 font-black uppercase">
+        <div class="flex items-center space-x-3 text-[10px] text-white font-black uppercase">
           <span class="animate-pulse">Handshake_Verified</span>
-          <span class="h-px flex-1 bg-cyan-900/50"></span>
+          <span class="h-px flex-1 bg-white/20"></span>
           <span class="text-white">Dest: index.html</span>
         </div>
       </div>
@@ -113,18 +129,18 @@
       <div class="space-y-3 mb-10">
         <div class="flex justify-between text-[10px] uppercase font-black text-slate-500 tracking-widest">
           <span>Relocating_System_Packets</span>
-          <span id="percent" class="text-cyan-400">0%</span>
+          <span id="percent" class="text-white">0%</span>
         </div>
-        <div class="h-1.5 w-full bg-slate-900 overflow-hidden border border-white/5">
-          <div class="progress-fill h-full bg-cyan-400"></div>
+        <div class="h-1.5 w-full bg-[#0a0a0a] overflow-hidden border border-white/10">
+          <div class="progress-fill h-full bg-white"></div>
         </div>
       </div>
 
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <a href="index.html" class="px-8 py-3 border border-cyan-400/30 text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">Manual_Override</a>
+        <a href="index.html" class="px-8 py-3 border border-white/30 text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all text-white">Manual_Override</a>
         <div class="text-[9px] text-slate-600 uppercase text-center md:text-right leading-tight font-black">
-          Lead Architect:<br>
-          <span class="text-white">Natalie Spiva</span>
+          Just made by Natalie Spiva // Co-Lead of AcreetionOS<br>
+          <span class="text-white">Sole Architect: Natalie Spiva</span>
         </div>
       </div>
     </div>
@@ -140,7 +156,7 @@
     <div class="mono text-[9px] text-slate-700 uppercase tracking-widest hidden md:block">
       RHEL Binary // Arch Rolling // Nix Atoms
     </div>
-    <p class="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-black">© 2026 Natalie Spiva. All Rights Reserved.</p>
+    <p class="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-black">© 2026 Natalie Spiva. Solely created by Natalie Spiva.</p>
   </footer>
 
   <script>
