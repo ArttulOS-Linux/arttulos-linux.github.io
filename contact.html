@@ -1,171 +1,123 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#000000] text-slate-200">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nexus_Connection | ArttulOS Support & Communication</title>
-  <meta name="description" content="Official support nexus for ArttulOS. Establish a communication link for technical assistance, bug reports, and project inquiries." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    :root {
-      --accent-white: #ffffff;
-      --accent-grey: #4b5563;
-      --bg-void: #000000;
-      --panel-slate: #0a0a0a;
-    }
-    body { font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-void); }
-    .mono { font-family: 'JetBrains Mono', monospace; }
-    
-    .brutal-card {
-      background: rgba(10, 10, 10, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.05);
-    }
-
-    .status-dot {
-      height: 8px; width: 8px;
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 8px currentColor;
-    }
-
-    /* Standardized Input Styling */
     .nexus-input {
-      background: #000;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
       padding: 1rem;
       width: 100%;
-      appearance: none;
+      margin-top: 0.5rem;
+      transition: border-color 0.2s;
     }
     .nexus-input:focus {
       outline: none;
-      border-color: #fff;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
     }
-
-    .hero-glitch {
-      text-shadow: 2px 0 #333, -2px 0 #666;
-    }
-
-    .acreetion-badge {
-      border: 1px solid #ffffff;
-      padding: 2px 8px;
-      font-size: 10px;
+    label {
+      font-size: 0.625rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
       text-transform: uppercase;
+      font-weight: 700;
       letter-spacing: 0.1em;
-      font-weight: bold;
     }
-
-    @keyframes scanline {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(1000%); }
-    }
-    .scanline {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 2px;
-      background: rgba(255, 255, 255, 0.03);
-      animation: scanline 10s linear infinite;
-      pointer-events: none;
-      z-index: 100;
-    }
-
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-thumb { background: #fff; }
   </style>
 </head>
-<body class="selection:bg-white selection:text-black min-h-screen flex flex-col">
-  <div class="scanline"></div>
+<body>
 
-  <!-- WIP STATUS BAR -->
-  <div class="bg-white text-black py-1 px-6 text-center text-[10px] mono font-bold uppercase tracking-[0.3em] relative z-[1000]">
+  <!-- STATUS BAR -->
+  <div class="status-bar mono uppercase">
     System_Status: Development_Active // [NOT_DEPLOYMENT_READY] // Project_Alpha
   </div>
 
-  <!-- HEADER HUD -->
-  <header class="border-b border-white/10 bg-black/80 backdrop-blur-xl sticky top-0 z-50">
-    <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <div class="w-10 h-10 bg-white text-black flex items-center justify-center font-black text-2xl border border-white">A</div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-xl font-bold tracking-tighter leading-none uppercase">Arttul<span class="text-slate-500">OS</span></h1>
-            <span class="acreetion-badge">Acreetion Affiliate</span>
+  <!-- NAVIGATION -->
+  <nav class="site-nav">
+    <div class="container nav-content">
+      <div class="brand">
+        <div class="logo-box">A</div>
+        <div class="brand-text">
+          <div style="display: flex; align-items: center;">
+            <h1 class="uppercase">Arttul<span style="color: var(--text-muted)">OS</span></h1>
+            <span class="badge uppercase mono font-bold">Acreetion Affiliate</span>
           </div>
-          <p class="text-[9px] mono text-slate-600 font-bold uppercase tracking-widest">Powered by Acreetion Technology</p>
         </div>
       </div>
-      <nav class="hidden md:flex space-x-8 mono text-[11px] font-bold uppercase tracking-widest text-slate-400">
-        <a href="index.html" class="hover:text-white transition">Dashboard</a>
-        <a href="install.html" class="hover:text-white transition">Provisioning</a>
-        <a href="repo-sync.html" class="hover:text-white transition">Repo_Sync</a>
-        <a href="faq.html" class="hover:text-white transition">Intel_Database</a>
-        <a href="developers.html" class="hover:text-white transition">The_Architect</a>
-        <a href="#" class="text-white border-b border-white">Nexus_Link</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="flex-1 max-w-7xl mx-auto w-full px-6 py-12 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12">
+      <div class="nav-links mono uppercase font-bold tracking-wide">
+        <a href="index.html">Dashboard</a>
+        <a href="install.html">Provisioning</a>
+        <a href="repo-sync.html">Repo_Sync</a>
+        <a href="faq.html">Intel_DB</a>
+        <a href="developers.html">The_Architect</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); display: grid; grid-template-columns: 1fr; lg-grid-template-columns: 1fr 380px; gap: 4rem;">
     
-    <!-- LEFT CONTENT: COMMUNICATION NODES -->
-    <div class="space-y-12">
+    <div style="display: flex; flex-direction: column; gap: 4rem;">
       
       <!-- BUG REPORTING PROTOCOL -->
       <section>
-        <div class="inline-block px-2 py-1 bg-white/10 border border-white/30 text-white text-[10px] mono font-bold uppercase tracking-[0.3em] mb-4">
-          Priority_Protocol: Alpha_Anomalies
-        </div>
-        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter italic mb-6 hero-glitch text-white">Anomaly_<span class="text-slate-500">Reports</span>.</h2>
+        <div class="badge-outline mono">Priority_Protocol: Alpha_Anomalies</div>
+        <h2 class="hero" style="margin-bottom: 1.5rem; text-shadow: 2px 0 #333, -2px 0 #666;">
+          <span style="font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 0.9; display: block; color: white;">Anomaly_<span style="color: var(--text-muted)">Reports</span>.</span>
+        </h2>
         
-        <div class="brutal-card p-8 space-y-6">
-          <p class="text-slate-400 leading-relaxed font-light">
-            The <span class="text-white font-bold italic">Arttul Nexus</span> centralizes all technical anomalies and feature requests through the Sovereign Discord node. We do not utilize GitHub for support to ensure real-time developer synchronization and immutable tracking.
+        <div class="card" style="padding: 3rem; display: flex; flex-direction: column; gap: 2rem;">
+          <p style="color: var(--text-secondary); font-size: 1.125rem; line-height: 1.6; font-weight: 300;">
+            The <span style="color: white; font-weight: 700; font-style: italic;">Arttul Nexus</span> centralizes all technical anomalies and feature requests through the Sovereign Discord node. We do not utilize GitHub for support to ensure real-time developer synchronization and immutable tracking.
           </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 bg-black/40 border border-white/5">
-              <h3 class="text-xs mono text-white uppercase font-bold mb-2">Centralized_Logic</h3>
-              <p class="text-[11px] text-slate-500">All code, mirror, and security feedback is processed via a single unified ticket stream for the lead architects.</p>
+          <div style="display: grid; grid-template-columns: 1fr; md-grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="padding: 1.5rem; background: var(--bg-primary); border: 1px solid var(--border-color);">
+              <h3 class="mono uppercase font-bold" style="font-size: 0.75rem; color: white; margin-bottom: 0.5rem;">Centralized_Logic</h3>
+              <p style="font-size: 0.625rem; color: var(--text-muted); line-height: 1.5;">All code, mirror, and security feedback is processed via a single unified ticket stream for the lead architects.</p>
             </div>
-            <div class="p-4 bg-black/40 border border-white/5">
-              <h3 class="text-xs mono text-white uppercase font-bold mb-2">Fast_Response</h3>
-              <p class="text-[11px] text-slate-500">ArttulOS developers operate directly within the Nexus node for 1:1 assistance and kernel debugging.</p>
+            <div style="padding: 1.5rem; background: var(--bg-primary); border: 1px solid var(--border-color);">
+              <h3 class="mono uppercase font-bold" style="font-size: 0.75rem; color: white; margin-bottom: 0.5rem;">Fast_Response</h3>
+              <p style="font-size: 0.625rem; color: var(--text-muted); line-height: 1.5;">ArttulOS developers operate directly within the Nexus node for 1:1 assistance and kernel debugging.</p>
             </div>
           </div>
-          <a href="https://discord.gg/AJ6uuvtDXY" target="_blank" class="block w-full py-4 bg-white text-black text-center font-black uppercase tracking-widest text-sm hover:bg-slate-300 transition-all">Establish_Discord_Link</a>
+          <a href="https://discord.gg/AJ6uuvtDXY" target="_blank" class="btn-primary" style="display: block; text-align: center; padding: 1.25rem;">Establish_Discord_Link</a>
         </div>
       </section>
 
       <!-- SECURE CONTACT FORM -->
       <section>
-        <div class="brutal-card overflow-hidden">
-          <div class="bg-[#0a0a0a] px-6 py-4 border-b border-white/10 flex justify-between items-center">
-            <h2 class="text-xs mono text-white font-bold uppercase tracking-widest">Establish_General_Link</h2>
-            <div class="flex space-x-2">
-              <span class="status-dot bg-white"></span>
-              <span class="text-[10px] mono text-white uppercase">Uplink_Ready</span>
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <div style="background: var(--bg-primary); padding: 1rem 2rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="mono font-bold uppercase" style="font-size: 0.75rem; color: white; letter-spacing: 0.1em;">Establish_General_Link</h2>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="dot" style="width: 6px; height: 6px; box-shadow: none;"></span>
+              <span class="mono" style="font-size: 0.625rem; color: white; text-transform: uppercase;">Uplink_Ready</span>
             </div>
           </div>
           
-          <div class="p-8">
-            <form class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div style="padding: 3rem;">
+            <form style="display: flex; flex-direction: column; gap: 2rem;">
+              <div style="display: grid; grid-template-columns: 1fr; md-grid-template-columns: 1fr 1fr; gap: 2rem;">
                 <div>
-                  <label class="text-[10px] mono text-slate-500 uppercase mb-2 block font-bold">Origin_Identity</label>
+                  <label>Origin_Identity</label>
                   <input type="text" placeholder="NAME / HANDLE" class="nexus-input">
                 </div>
                 <div>
-                  <label class="text-[10px] mono text-slate-500 uppercase mb-2 block font-bold">Return_Path</label>
+                  <label>Return_Path</label>
                   <input type="email" placeholder="EMAIL_ADDRESS" class="nexus-input">
                 </div>
               </div>
               <div>
-                <label class="text-[10px] mono text-slate-500 uppercase mb-2 block font-bold">Transmission_Data</label>
+                <label>Transmission_Data</label>
                 <textarea rows="5" placeholder="ENTER_MESSAGE_HERE..." class="nexus-input"></textarea>
               </div>
-              <button type="submit" class="px-8 py-3 border-2 border-white text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all">Transmit_Data</button>
+              <button type="submit" class="btn-primary" style="width: auto; align-self: flex-start; padding: 1rem 3rem;">Transmit_Data</button>
             </form>
           </div>
         </div>
@@ -173,48 +125,47 @@
 
     </div>
 
-    <!-- RIGHT SIDEBAR: DIRECTORY & RESOURCES -->
-    <aside class="space-y-8">
+    <!-- SIDEBAR -->
+    <aside style="display: flex; flex-direction: column; gap: 2rem;">
       
       <!-- TEAM DIRECTORY -->
-      <div class="brutal-card p-6 bg-[#0a0a0a]/30">
-        <h3 class="text-xs mono text-slate-500 uppercase mb-6 tracking-widest border-b border-white/10 pb-2">Technical_Directory</h3>
-        <div class="space-y-8">
+      <div class="card" style="background: rgba(10, 10, 10, 0.4);">
+        <h3 class="mono uppercase font-bold" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1.5rem; letter-spacing: 0.1em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Technical_Directory</h3>
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
           <div>
-            <span class="text-sm font-bold block uppercase italic text-white">Natalie Spiva</span>
-            <span class="text-[10px] mono text-slate-400 font-bold block mb-2 uppercase">Sole Architect // Lead Maintainer</span>
-            <p class="text-[11px] text-slate-500 mb-3">Co-Lead of AcreetionOS. This project is a solo endeavor to explore sovereign hybrid architecture.</p>
-            <div class="space-y-1 text-[10px] mono">
-              <a href="mailto:natalie@arttulos.io" class="block text-slate-400 hover:text-white transition">EMAIL: natalie@arttulos.io</a>
-              <a href="xmpp:sprungles@xmpp.jp" class="block text-slate-400 hover:text-white transition">XMPP: sprungles@xmpp.jp</a>
+            <span style="font-size: 1.125rem; font-weight: 700; text-transform: uppercase; font-style: italic; color: white; display: block;">Natalie Spiva</span>
+            <span class="mono font-bold" style="font-size: 0.625rem; color: var(--text-secondary); display: block; margin-bottom: 0.75rem; text-transform: uppercase;">Sole Architect // Lead Maintainer</span>
+            <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">Co-Lead of AcreetionOS. This project is a solo endeavor to explore sovereign hybrid architecture.</p>
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;" class="mono text-xs">
+              <a href="mailto:natalie@arttulos.io" style="color: var(--text-secondary); text-decoration: underline;">EMAIL: natalie@arttulos.io</a>
+              <a href="xmpp:sprungles@xmpp.jp" style="color: var(--text-secondary); text-decoration: underline;">XMPP: sprungles@xmpp.jp</a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- EXTERNAL INTEL -->
-      <div class="brutal-card p-6">
-        <h3 class="text-xs mono text-slate-500 uppercase mb-4 tracking-widest">External_Intel</h3>
-        <div class="space-y-3">
-          <a href="faq.html" class="flex items-center justify-between p-3 bg-black/40 border border-white/10 hover:border-white transition-all">
-            <span class="text-[11px] mono uppercase">Arttul_Wiki</span>
-            <span class="text-white text-xs">→</span>
+      <div class="card">
+        <h3 class="mono uppercase font-bold" style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; letter-spacing: 0.1em;">External_Intel</h3>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <a href="faq.html" class="card" style="padding: 1rem; display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary);">
+            <span class="mono uppercase" style="font-size: 0.75rem;">Arttul_Wiki</span>
+            <span style="color: white;">→</span>
           </a>
-          <a href="https://wiki.archlinux.org/" target="_blank" class="flex items-center justify-between p-3 bg-black/40 border border-white/10 hover:border-white transition-all">
-            <span class="text-[11px] mono uppercase">Arch_Intel</span>
-            <span class="text-slate-600 text-xs">→</span>
+          <a href="https://wiki.archlinux.org/" target="_blank" class="card" style="padding: 1rem; display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary);">
+            <span class="mono uppercase" style="font-size: 0.75rem;">Arch_Intel</span>
+            <span style="color: white;">→</span>
           </a>
-          <a href="https://access.redhat.com/documentation" target="_blank" class="flex items-center justify-between p-3 bg-black/40 border border-white/10 hover:border-slate-500 transition-all">
-            <span class="text-[11px] mono uppercase">RHEL_Source</span>
-            <span class="text-slate-500 text-xs">→</span>
+          <a href="https://access.redhat.com/documentation" target="_blank" class="card" style="padding: 1rem; display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary);">
+            <span class="mono uppercase" style="font-size: 0.75rem;">RHEL_Source</span>
+            <span style="color: white;">→</span>
           </a>
         </div>
       </div>
 
-      <!-- STATUS HUD -->
-      <div class="p-6 border border-white/20 bg-white/5">
-        <h3 class="text-xs mono text-white font-bold uppercase mb-2">Nexus_Uplink</h3>
-        <p class="text-[11px] text-slate-400 leading-relaxed italic font-light">
+      <div class="card" style="border-color: var(--border-hover); background: rgba(255, 255, 255, 0.05);">
+        <h3 class="mono uppercase font-bold" style="font-size: 0.75rem; color: white; margin-bottom: 0.5rem;">Nexus_Uplink</h3>
+        <p style="font-size: 0.75rem; color: var(--text-secondary); font-style: italic; font-weight: 300; line-height: 1.6;">
           ArttulOS is a sovereign hybrid. Support is provided by the same engineering team that maintains the core engine. No outsourced tiers. No translation layers.
         </p>
       </div>
@@ -222,26 +173,25 @@
     </aside>
   </main>
 
-  <!-- FOOTER HUD -->
-  <footer class="border-t border-white/10 bg-black py-12 px-6 mt-12">
-    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center md:text-left">
-      <div class="mono text-[10px] uppercase tracking-[0.2em] text-slate-600">
-        <p class="mb-2">ArttulOS Sovereign Architecture</p>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col mono uppercase tracking-wide">
+        <p style="margin-bottom: 8px;">ArttulOS Sovereign Architecture</p>
         <p>Deployment: 2026.02.25</p>
         <p>Attribution: AcreetionOS Co-Lead Heritage</p>
       </div>
       
-      <div class="text-center">
-        <p class="text-xs mono font-bold text-white mb-2 uppercase tracking-widest italic">Just made by Natalie Spiva // Co-Lead of AcreetionOS</p>
-        <p class="text-2xl font-black italic tracking-tighter uppercase text-white">ArttulOS Project</p>
+      <div class="footer-col footer-center">
+        <p class="mono font-bold uppercase tracking-wide" style="color: var(--text-primary); margin-bottom: 8px;">Just made by Natalie Spiva // Co-Lead of AcreetionOS</p>
+        <p style="font-size: 1.5rem; font-weight: 900; font-style: italic; text-transform: uppercase; color: white; line-height: 1;">ArttulOS Project</p>
       </div>
 
-      <div class="flex flex-col items-center md:items-end gap-2 text-[10px] mono uppercase text-slate-500">
-        <p>© 2026 Natalie Spiva. Solely created by Natalie Spiva.</p>
-        <div class="flex space-x-4">
-          <a href="https://acreetionos.org" class="hover:text-white transition">AcreetionOS.org</a>
-          <a href="https://github.com/arttulos-linux" class="hover:text-white transition">Github</a>
-          <a href="blog.html" class="hover:text-white transition">Project_Logs</a>
+      <div class="footer-col footer-end mono uppercase tracking-wide">
+        <p style="margin-bottom: 8px;">© 2026 Natalie Spiva. Solely created by Natalie Spiva.</p>
+        <div style="display: flex; gap: 16px;">
+          <a href="https://acreetionos.org">AcreetionOS.org</a>
+          <a href="https://github.com/arttulos-linux">Github</a>
+          <a href="blog.html">Project_Logs</a>
         </div>
       </div>
     </div>
